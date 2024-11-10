@@ -7,8 +7,6 @@ import store.domain.Product;
 import store.infra.repository.ProductRepository;
 import store.infra.repository.Repository;
 import store.infra.repository.converter.ProductConverter;
-import store.infra.repository.converter.ProductEntityConverter;
-import store.infra.repository.converter.PromotionEntityConverter;
 
 public class DefaultProductRepositoryConfig implements ProductRepositoryConfig {
 
@@ -23,8 +21,6 @@ public class DefaultProductRepositoryConfig implements ProductRepositoryConfig {
                 productDatabaseConfig.getProductDatabase(),
                 promotionDatabaseConfig.getPromotionDatabase(),
                 new ProductConverter(),
-                new ProductEntityConverter(),
-                new PromotionEntityConverter(),
                 dateProviderConfig.getDateProvider()
         );
     }

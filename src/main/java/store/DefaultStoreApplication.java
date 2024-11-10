@@ -4,7 +4,6 @@ import store.config.aop.RetryHandlerConfig;
 import store.config.controller.ControllerConfig;
 import store.config.controller.DefaultControllerConfig;
 import store.config.controller.RePurchaseConfig;
-import store.config.controller.TransactionConfig;
 import store.config.infra.database.ProductFileDatabaseConfig;
 import store.config.infra.database.PromotionFileDatabaseConfig;
 import store.config.infra.repository.DefaultProductRepositoryConfig;
@@ -51,8 +50,7 @@ public class DefaultStoreApplication implements StoreApplication {
 
     private Controller buildController(final ConfigurationContext context) {
         ControllerConfig baseController = buildBaseController(context);
-        ControllerConfig rePurchaseController = buildRePurchaseController(context, baseController);
-        return buildTransactionController(context, rePurchaseController).getController();
+        return buildRePurchaseController(context, baseController).getController();
     }
 
     private ControllerConfig buildBaseController(final ConfigurationContext context) {
@@ -73,16 +71,6 @@ public class DefaultStoreApplication implements StoreApplication {
                 baseController,
                 context.inputHandler(),
                 context.retryHandler()
-        );
-    }
-
-    private ControllerConfig buildTransactionController(
-            final ConfigurationContext context,
-            final ControllerConfig rePurchaseController
-    ) {
-        return new TransactionConfig(
-                rePurchaseController,
-                new RepositoriesConfig(context.productRepository())
         );
     }
 

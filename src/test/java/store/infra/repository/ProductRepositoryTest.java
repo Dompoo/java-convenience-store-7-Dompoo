@@ -16,8 +16,6 @@ import store.domain.Stock;
 import store.infra.entity.ProductEntity;
 import store.infra.entity.PromotionEntity;
 import store.infra.repository.converter.ProductConverter;
-import store.infra.repository.converter.ProductEntityConverter;
-import store.infra.repository.converter.PromotionEntityConverter;
 import store.testUtil.testDouble.DateProviderStub;
 import store.testUtil.testDouble.ProductFileDatabaseFake;
 import store.testUtil.testDouble.PromotionFileDatabaseFake;
@@ -41,8 +39,6 @@ class ProductRepositoryTest {
                 productFileDatabaseFake,
                 promotionFileDatabaseFake,
                 new ProductConverter(),
-                new ProductEntityConverter(),
-                new PromotionEntityConverter(),
                 dateProviderStub
         );
     }

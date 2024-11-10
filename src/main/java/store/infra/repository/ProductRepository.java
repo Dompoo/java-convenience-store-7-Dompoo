@@ -10,16 +10,9 @@ import store.infra.database.Database;
 import store.infra.entity.ProductEntity;
 import store.infra.entity.PromotionEntity;
 import store.infra.repository.converter.ProductConverter;
-import store.infra.repository.converter.ProductEntityConverter;
-import store.infra.repository.converter.PromotionEntityConverter;
 import store.service.dateProvider.DateProvider;
 
 public class ProductRepository implements Repository<Product> {
-
-    private final Database<ProductEntity> productDatabase;
-    private final Database<PromotionEntity> promotionDatabase;
-    private final ProductEntityConverter productEntityConverter;
-    private final PromotionEntityConverter promotionEntityConverter;
 
     private final List<Product> products = new ArrayList<>();
 
@@ -27,14 +20,8 @@ public class ProductRepository implements Repository<Product> {
             final Database<ProductEntity> productDatabase,
             final Database<PromotionEntity> promotionDatabase,
             final ProductConverter productConverter,
-            final ProductEntityConverter productEntityConverter,
-            final PromotionEntityConverter promotionEntityConverter,
             final DateProvider dateProvider
     ) {
-        this.productEntityConverter = productEntityConverter;
-        this.promotionEntityConverter = promotionEntityConverter;
-        this.productDatabase = productDatabase;
-        this.promotionDatabase = promotionDatabase;
         List<PromotionEntity> promotionEntities = getUniquePromotionEntities(promotionDatabase, dateProvider.getDate());
         this.products.addAll(
                 productConverter.convert(productDatabase.readAll(), promotionEntities, dateProvider.getDate())
@@ -74,11 +61,5 @@ public class ProductRepository implements Repository<Product> {
 
         products.remove(findProduct);
         products.add(product);
-    }
-
-    @Override
-    public void updateDatabaseInBatch() {
-        productDatabase.updateAll(productEntityConverter.convert(products));
-        promotionDatabase.updateAll(promotionEntityConverter.convert(products));
     }
 }

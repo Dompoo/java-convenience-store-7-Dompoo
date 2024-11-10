@@ -10,6 +10,4 @@ public interface Repository<T> {
     Optional<T> findByName(String name);
 
     void update(T object);
-
-    void updateDatabaseInBatch();
 }

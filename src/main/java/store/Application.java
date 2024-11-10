@@ -9,7 +9,6 @@ public class Application {
     }
 
     private static StoreApplication getStoreApplication() {
-        ServiceLoader<StoreApplication> loader = ServiceLoader.load(StoreApplication.class);
-        return loader.findFirst().orElseThrow(StoreExceptions.APPLICATION_LOAD_FAIL::get);
+        return new DefaultStoreApplication();
     }
 }

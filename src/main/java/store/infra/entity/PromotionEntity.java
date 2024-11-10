@@ -26,45 +26,8 @@ public record PromotionEntity(
         return new PromotionEntity(name, buy, get, startDate, endDate);
     }
 
-    public static Optional<PromotionEntity> from(final Product product) {
-        if (product.hasPromotion()) {
-            Promotion promotion = product.getPromotion();
-            return Optional.of(new PromotionEntity(
-                    promotion.getName(),
-                    promotion.getPromotionBuy(),
-                    promotion.getPromotionGet(),
-                    promotion.getStartDate(),
-                    promotion.getEndDate())
-            );
-        }
-        return Optional.empty();
-    }
-
     public boolean isAvailable(final LocalDate now) {
         return startDate.isBefore(now) && now.isBefore(endDate);
-    }
-
-    @Override
-    public String toLine(final String[] columns) {
-        StringJoiner stringJoiner = new StringJoiner(",");
-        for (String column : columns) {
-            if (column.equals("name")) {
-                stringJoiner.add(name);
-            }
-            if (column.equals("buy")) {
-                stringJoiner.add(String.valueOf(buy));
-            }
-            if (column.equals("get")) {
-                stringJoiner.add(String.valueOf(get));
-            }
-            if (column.equals("start_date")) {
-                stringJoiner.add(String.valueOf(startDate));
-            }
-            if (column.equals("end_date")) {
-                stringJoiner.add(String.valueOf(endDate));
-            }
-        }
-        return stringJoiner.toString();
     }
 
     @Override

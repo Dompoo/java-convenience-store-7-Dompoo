@@ -30,8 +30,4 @@ public class ProductRepositoryFake implements Repository<Product> {
     @Override
     public void update(Product product) {
     }
-
-    @Override
-    public void updateDatabaseInBatch() {
-    }
 }

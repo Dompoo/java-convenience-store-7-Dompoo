@@ -37,27 +37,6 @@ public abstract class FileDatabase<T extends DatabaseEntity> implements Database
         }
     }
 
-    @Override
-    public void updateAll(final List<T> objects) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(getFilePath(), false))) {
-            writer.write(buildUpdateScript(objects));
-        } catch (IOException e) {
-            throw StoreExceptions.FILE_NOT_WRITEABLE.get();
-        }
-    }
-
-    private String buildUpdateScript(final List<T> objects) {
-        StringJoiner stringJoiner = new StringJoiner(NEW_LINE);
-        stringJoiner.add(headerLine);
-        for (T object : objects) {
-            String line = object.toLine(headerLine.split(COLUMN_SEPARATOR));
-            stringJoiner.add(line);
-        }
-        stringJoiner.add("");
-        return stringJoiner.toString();
-    }
-
-
     private List<T> buildObjects(final BufferedReader reader) throws IOException {
         List<T> objects = new ArrayList<>();
         reader.readLine();

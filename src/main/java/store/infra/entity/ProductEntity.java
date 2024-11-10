@@ -26,39 +26,8 @@ public record ProductEntity(
         return new ProductEntity(name, price, stock, promotionName);
     }
 
-    public static Stream<ProductEntity> from(final Product product) {
-        List<ProductEntity> productEntities = new ArrayList<>();
-        if (product.hasPromotion()) {
-            productEntities.add(new ProductEntity(product.getName(), product.getPrice(),
-                    product.getPromotionStock(), product.getPromotion().getName()));
-        }
-        productEntities.add(new ProductEntity(product.getName(), product.getPrice(),
-                product.getDefaultStock(), "null"));
-        return productEntities.stream();
-    }
-
     public boolean isPromotionStockEntity() {
         return promotionName != null && !promotionName.isBlank();
-    }
-
-    @Override
-    public String toLine(final String[] columns) {
-        StringJoiner stringJoiner = new StringJoiner(",");
-        for (String column : columns) {
-            if (column.equals("name")) {
-                stringJoiner.add(name);
-            }
-            if (column.equals("price")) {
-                stringJoiner.add(String.valueOf(price));
-            }
-            if (column.equals("quantity")) {
-                stringJoiner.add(String.valueOf(quantity));
-            }
-            if (column.equals("promotion")) {
-                stringJoiner.add(promotionName);
-            }
-        }
-        return stringJoiner.toString();
     }
 
     @Override
