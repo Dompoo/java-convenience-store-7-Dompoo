@@ -10,6 +10,14 @@ public enum StoreExceptions {
             "잘못된 입력입니다. 다시 입력해 주세요.",
             IllegalArgumentException.class
     ),
+    FILE_NOT_READABLE(
+            "파일 읽기 중 오류가 발생했습니다.",
+            IllegalStateException.class
+    ),
+    FILE_NOT_WRITEABLE(
+            "파일 쓰기 중 오류가 발생했습니다.",
+            IllegalStateException.class
+    ),
     ;
 
     private final String message;
