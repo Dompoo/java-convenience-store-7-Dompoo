@@ -37,9 +37,9 @@ class DefaultProductServiceTest {
             Promotion promotion1 = new Promotion("우도땅콩축제", PromotionType.BUY_ONE_GET_ONE, pastDate, futureDate);
             Promotion promotion2 = new Promotion("빼빼로데이", PromotionType.BUY_ONE_GET_ONE, pastDate, futureDate);
             Promotion promotion3 = new Promotion("", PromotionType.NO_PROMOTION, pastDate, pastDate);
-            Product product1 = new Product("우도땅콩", 1000, 10, 9, promotion1);
-            Product product2 = new Product("빼빼로", 500, 5, 4, promotion2);
-            Product product3 = new Product("아이스크림", 1500, 15, 0, promotion3);
+            Product product1 = Product.of("우도땅콩", 1000, 10, 9, promotion1);
+            Product product2 = Product.of("빼빼로", 500, 5, 4, promotion2);
+            Product product3 = Product.of("아이스크림", 1500, 15, 0, promotion3);
             productRepositoryFake.setProducts(product1, product2, product3);
 
             //when
@@ -61,7 +61,7 @@ class DefaultProductServiceTest {
         void 프로모션_중이나_프로모션_재고가_없는_상품을_읽는다() {
             //given
             Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_ONE_GET_ONE, pastDate, futureDate);
-            Product product = new Product("우도땅콩", 1000, 10, 0, promotion);
+            Product product = Product.of("우도땅콩", 1000, 10, 0, promotion);
             productRepositoryFake.setProducts(product);
 
             //when
@@ -80,7 +80,7 @@ class DefaultProductServiceTest {
         void 프로모션_중이나_기본_재고가_없는_상품을_읽는다() {
             //given
             Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_ONE_GET_ONE, pastDate, futureDate);
-            Product product = new Product("우도땅콩", 1000, 0, 9, promotion);
+            Product product = Product.of("우도땅콩", 1000, 0, 9, promotion);
             productRepositoryFake.setProducts(product);
 
             //when
@@ -99,7 +99,7 @@ class DefaultProductServiceTest {
         void 프로모션_중이나_모든_재고가_없는_상품을_읽는다() {
             //given
             Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_ONE_GET_ONE, pastDate, futureDate);
-            Product product = new Product("우도땅콩", 1000, 0, 0, promotion);
+            Product product = Product.of("우도땅콩", 1000, 0, 0, promotion);
             productRepositoryFake.setProducts(product);
 
             //when
@@ -118,7 +118,7 @@ class DefaultProductServiceTest {
         void 프로모션_중이지_않으며_기본_재고가_없는_상품을_읽는다() {
             //given
             Promotion promotion = new Promotion("", PromotionType.NO_PROMOTION, pastDate, futureDate);
-            Product product = new Product("우도땅콩", 1000, 0, 0, promotion);
+            Product product = Product.of("우도땅콩", 1000, 0, 0, promotion);
             productRepositoryFake.setProducts(product);
 
             //when

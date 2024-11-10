@@ -54,6 +54,6 @@ public class ProductBuilder {
     }
 
     public Product build() {
-        return new Product(name, price, defaultStock, promotionStock, promotion);
+        return Product.of(name, price, defaultStock, promotionStock, promotion);
     }
 }

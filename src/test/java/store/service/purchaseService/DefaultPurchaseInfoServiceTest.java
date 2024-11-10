@@ -41,8 +41,8 @@ class DefaultPurchaseInfoServiceTest {
             //given
             Promotion promotion1 = new Promotion("우도땅콩축제", PromotionType.BUY_ONE_GET_ONE, pastDate, futureDate);
             Promotion promotion2 = new Promotion("", PromotionType.NO_PROMOTION, pastDate, pastDate);
-            Product product1 = new Product("우도땅콩", 1000, 10, 9, promotion1);
-            Product product2 = new Product("빼빼로", 500, 10, 0, promotion2);
+            Product product1 = Product.of("우도땅콩", 1000, 10, 9, promotion1);
+            Product product2 = Product.of("빼빼로", 500, 10, 0, promotion2);
             productRepositoryFake.setProducts(product1, product2);
             List<PurchaseRequest> purchaseRequests = List.of(
                     new PurchaseRequest("우도땅콩", 10),
@@ -66,8 +66,8 @@ class DefaultPurchaseInfoServiceTest {
             //given
             Promotion promotion1 = new Promotion("우도땅콩축제", PromotionType.BUY_ONE_GET_ONE, pastDate, futureDate);
             Promotion promotion2 = new Promotion("", PromotionType.NO_PROMOTION, pastDate, pastDate);
-            Product product1 = new Product("우도땅콩", 1000, 9, 9, promotion1);
-            Product product2 = new Product("빼빼로", 500, 9, 0, promotion2);
+            Product product1 = Product.of("우도땅콩", 1000, 9, 9, promotion1);
+            Product product2 = Product.of("빼빼로", 500, 9, 0, promotion2);
             productRepositoryFake.setProducts(product1, product2);
             List<PurchaseRequest> purchaseRequests = List.of(
                     new PurchaseRequest("우도땅콩", 10),
@@ -99,7 +99,7 @@ class DefaultPurchaseInfoServiceTest {
         ) {
             //given
             Promotion promotion = new Promotion("우도땅콩축제", PromotionType.NO_PROMOTION, pastDate, futureDate);
-            Product product = new Product("우도땅콩", 1000, 9, 9, promotion);
+            Product product = Product.of("우도땅콩", 1000, 9, 9, promotion);
             productRepositoryFake.setProducts(product);
 
             //when
@@ -130,7 +130,7 @@ class DefaultPurchaseInfoServiceTest {
         ) {
             //given
             Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_TWO_GET_ONE, pastDate, futureDate);
-            Product product = new Product("우도땅콩", 1000, 9, 9, promotion);
+            Product product = Product.of("우도땅콩", 1000, 9, 9, promotion);
             productRepositoryFake.setProducts(product);
 
             //when
@@ -161,7 +161,7 @@ class DefaultPurchaseInfoServiceTest {
         ) {
             //given
             Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_TWO_GET_ONE, pastDate, futureDate);
-            Product product = new Product("우도땅콩", 1000, 9, 9, promotion);
+            Product product = Product.of("우도땅콩", 1000, 9, 9, promotion);
             productRepositoryFake.setProducts(product);
 
             //when
@@ -192,7 +192,7 @@ class DefaultPurchaseInfoServiceTest {
         ) {
             //given
             Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_TWO_GET_ONE, pastDate, futureDate);
-            Product product = new Product("우도땅콩", 1000, 9, 9, promotion);
+            Product product = Product.of("우도땅콩", 1000, 9, 9, promotion);
             productRepositoryFake.setProducts(product);
 
             //when
@@ -226,7 +226,7 @@ class DefaultPurchaseInfoServiceTest {
         ) {
             //given
             Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_TWO_GET_ONE, pastDate, futureDate);
-            Product product = new Product("우도땅콩", 1000, 9, 9, promotion);
+            Product product = Product.of("우도땅콩", 1000, 9, 9, promotion);
             productRepositoryFake.setProducts(product);
 
             //when
@@ -260,7 +260,7 @@ class DefaultPurchaseInfoServiceTest {
         ) {
             //given
             Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_TWO_GET_ONE, pastDate, futureDate);
-            Product product = new Product("우도땅콩", 1000, 9, 9, promotion);
+            Product product = Product.of("우도땅콩", 1000, 9, 9, promotion);
             productRepositoryFake.setProducts(product);
 
             //when

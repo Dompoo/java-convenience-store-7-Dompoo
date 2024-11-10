@@ -29,7 +29,7 @@ class ProductTest {
             Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_ONE_GET_ONE, pastDate, futureDate);
 
             //expected
-            assertThatCode(() -> new Product(name, price, defaultStock, promotionStock, promotion))
+            assertThatCode(() -> Product.of(name, price, defaultStock, promotionStock, promotion))
                     .doesNotThrowAnyException();
         }
 
@@ -43,7 +43,7 @@ class ProductTest {
             Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_ONE_GET_ONE, pastDate, futureDate);
 
             //expected
-            assertThatThrownBy(() -> new Product(name, price, defaultStock, promotionStock, promotion))
+            assertThatThrownBy(() -> Product.of(name, price, defaultStock, promotionStock, promotion))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage("잘못된 입력입니다. 다시 입력해 주세요.");
         }
@@ -58,7 +58,7 @@ class ProductTest {
             Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_ONE_GET_ONE, pastDate, futureDate);
 
             //expected
-            assertThatThrownBy(() -> new Product(name, price, defaultStock, promotionStock, promotion))
+            assertThatThrownBy(() -> Product.of(name, price, defaultStock, promotionStock, promotion))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage("잘못된 입력입니다. 다시 입력해 주세요.");
         }
@@ -73,7 +73,7 @@ class ProductTest {
             Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_ONE_GET_ONE, pastDate, futureDate);
 
             //expected
-            assertThatThrownBy(() -> new Product(name, price, defaultStock, promotionStock, promotion))
+            assertThatThrownBy(() -> Product.of(name, price, defaultStock, promotionStock, promotion))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage("잘못된 입력입니다. 다시 입력해 주세요.");
         }
@@ -88,7 +88,7 @@ class ProductTest {
             Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_ONE_GET_ONE, pastDate, futureDate);
 
             //expected
-            assertThatThrownBy(() -> new Product(name, price, defaultStock, promotionStock, promotion))
+            assertThatThrownBy(() -> Product.of(name, price, defaultStock, promotionStock, promotion))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage("잘못된 입력입니다. 다시 입력해 주세요.");
         }
@@ -103,7 +103,7 @@ class ProductTest {
             Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_ONE_GET_ONE, pastDate, futureDate);
 
             //expected
-            assertThatThrownBy(() -> new Product(name, price, defaultStock, promotionStock, promotion))
+            assertThatThrownBy(() -> Product.of(name, price, defaultStock, promotionStock, promotion))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage("잘못된 입력입니다. 다시 입력해 주세요.");
         }
@@ -116,7 +116,7 @@ class ProductTest {
         void 상품_재고를_차감하면_그대로_반영된다() {
             //given
             Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_ONE_GET_ONE, pastDate, futureDate);
-            Product sut = new Product("우도땅콩", 1000, 10, 10, promotion);
+            Product sut = Product.of("우도땅콩", 1000, 10, 10, promotion);
 
             //when
             sut.reduceStock(10, 5);
@@ -138,7 +138,7 @@ class ProductTest {
         void 정확한_프로모션단위로_요청한다(int purchaseAmount) {
             //given
             Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_TWO_GET_ONE, pastDate, futureDate);
-            Product sut = new Product("우도땅콩", 1000, 10, 10, promotion);
+            Product sut = Product.of("우도땅콩", 1000, 10, 10, promotion);
 
             //when
             boolean result = sut.isJustRightPromotionUnit(purchaseAmount);
@@ -154,7 +154,7 @@ class ProductTest {
         void 정확한_프로모션단위로가_아니도록_요청한다(int purchaseAmount) {
             //given
             Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_TWO_GET_ONE, pastDate, futureDate);
-            Product sut = new Product("우도땅콩", 1000, 10, 10, promotion);
+            Product sut = Product.of("우도땅콩", 1000, 10, 10, promotion);
 
             //when
             boolean result = sut.isJustRightPromotionUnit(purchaseAmount);
@@ -174,7 +174,7 @@ class ProductTest {
         void 무료_상품을_받을_수_있는_수량으로_요청한다(int purchaseAmount) {
             //given
             Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_TWO_GET_ONE, pastDate, futureDate);
-            Product sut = new Product("우도땅콩", 1000, 10, 10, promotion);
+            Product sut = Product.of("우도땅콩", 1000, 10, 10, promotion);
 
             //when
             boolean result = sut.canGetFreeProduct(purchaseAmount);
@@ -190,7 +190,7 @@ class ProductTest {
         void 무료_상품을_받을_수_없는_수량으로_요청한다(int purchaseAmount) {
             //given
             Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_TWO_GET_ONE, pastDate, futureDate);
-            Product sut = new Product("우도땅콩", 1000, 10, 10, promotion);
+            Product sut = Product.of("우도땅콩", 1000, 10, 10, promotion);
 
             //when
             boolean result = sut.canGetFreeProduct(purchaseAmount);
@@ -206,7 +206,7 @@ class ProductTest {
         void 프로모션이_없다면_항상_불가능하다(int purchaseAmount) {
             //given
             Promotion promotion = new Promotion("", PromotionType.NO_PROMOTION, pastDate, pastDate);
-            Product sut = new Product("우도땅콩", 1000, 10, 10, promotion);
+            Product sut = Product.of("우도땅콩", 1000, 10, 10, promotion);
 
             //when
             boolean result = sut.canGetFreeProduct(purchaseAmount);
@@ -238,7 +238,7 @@ class ProductTest {
         void 프로모션으로_추가_무료로_얻을_수_있는_상품_개수를_계산한다(int purchaseAmount, int freeProducts) {
             //given
             Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_TWO_GET_ONE, pastDate, futureDate);
-            Product sut = new Product("우도땅콩", 1000, 10, 10, promotion);
+            Product sut = Product.of("우도땅콩", 1000, 10, 10, promotion);
 
             //when
             int result = sut.calculateBringFreeProductCount(purchaseAmount);
@@ -270,7 +270,7 @@ class ProductTest {
         void 프로모션으로_구매하지_못하는_상품_개수를_계산한다(int purchaseAmount, int noPromtions) {
             //given
             Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_TWO_GET_ONE, pastDate, futureDate);
-            Product sut = new Product("우도땅콩", 1000, 10, 10, promotion);
+            Product sut = Product.of("우도땅콩", 1000, 10, 10, promotion);
 
             //when
             int result = sut.calculateNoPromotionsProductCount(purchaseAmount);

@@ -12,19 +12,28 @@ final public class Product {
     private Stock stock;
     private final Promotion promotion;
 
-    public Product(
+    private Product(
             final String name,
             final int price,
-            final int defaultStock,
-            final int promotionStock,
+            final Stock stock,
             final Promotion promotion
     ) {
         ParamsValidator.validateParamsNotNull(name, promotion);
         validate(name, price);
         this.name = name;
         this.price = price;
-        this.stock = new Stock(defaultStock, promotionStock);
+        this.stock = stock;
         this.promotion = promotion;
+    }
+
+    public static Product of(
+            final String name,
+            final int price,
+            final int defaultStock,
+            final int promotionStock,
+            final Promotion promotion
+    ) {
+        return new Product(name, price, new Stock(defaultStock, promotionStock), promotion);
     }
 
     private static void validate(final String name, final int price) {

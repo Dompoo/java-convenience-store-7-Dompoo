@@ -38,9 +38,9 @@ class OutputParserTest {
             Promotion promotion2 = new Promotion("초코바1+1", PromotionType.BUY_ONE_GET_ONE, pastDate, futureDate);
             Promotion noPromotion = new Promotion("", PromotionType.NO_PROMOTION, pastDate, pastDate);
             List<ProductResponse> productResponses = ProductResponse.fromList(List.of(
-                    new Product("콜라", 1500, 0, 10, promotion1),
-                    new Product("초코바", 2000, 50, 15, promotion2),
-                    new Product("감자", 500, 75, 0, noPromotion)
+                    Product.of("콜라", 1500, 0, 10, promotion1),
+                    Product.of("초코바", 2000, 50, 15, promotion2),
+                    Product.of("감자", 500, 75, 0, noPromotion)
             ));
 
             //when
@@ -61,7 +61,7 @@ class OutputParserTest {
             //given
             Promotion noPromotion = new Promotion("", PromotionType.NO_PROMOTION, pastDate, pastDate);
             List<ProductResponse> productResponses = ProductResponse.fromList(List.of(
-                    new Product("감자", 500, 0, 0, noPromotion))
+                    Product.of("감자", 500, 0, 0, noPromotion))
             );
 
             //when
@@ -79,7 +79,7 @@ class OutputParserTest {
             Promotion promotion = new Promotion("콜라1+1", PromotionType.BUY_ONE_GET_ONE, pastDate, futureDate);
 
             List<ProductResponse> productResponses = ProductResponse.fromList(List.of(
-                    new Product("콜라", 1500, 0, 0, promotion)
+                    Product.of("콜라", 1500, 0, 0, promotion)
             ));
 
             //when
@@ -97,7 +97,7 @@ class OutputParserTest {
             //given
             Promotion promotion = new Promotion("초코바1+1", PromotionType.BUY_ONE_GET_ONE, pastDate, futureDate);
             List<ProductResponse> productResponses = ProductResponse.fromList(List.of(
-                    new Product("초코바", 2000, 0, 15, promotion)
+                    Product.of("초코바", 2000, 0, 15, promotion)
             ));
 
             //when
@@ -115,7 +115,7 @@ class OutputParserTest {
             //given
             Promotion promotion = new Promotion("초코바1+1", PromotionType.BUY_ONE_GET_ONE, pastDate, futureDate);
             List<ProductResponse> productResponses = ProductResponse.fromList(List.of(
-                    new Product("초코바", 2000, 50, 0, promotion)
+                    Product.of("초코바", 2000, 50, 0, promotion)
             ));
 
             //when

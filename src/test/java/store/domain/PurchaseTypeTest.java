@@ -28,7 +28,7 @@ class PurchaseTypeTest {
                          int totalPurchase, int promotionGet, int decreasePromotionStock) {
         //given
         Promotion promotion = new Promotion("우도땅콩축제", PromotionType.valueOf(promotionName), pastDate, futureDate);
-        Product product = new Product("땅콩", 1000, 100, promotionStock, promotion);
+        Product product = Product.of("땅콩", 1000, 100, promotionStock, promotion);
         PurchaseInfo purchaseInfo = PurchaseInfo.of(product, purchaseAmount);
 
         //when
@@ -59,7 +59,7 @@ class PurchaseTypeTest {
                         int totalPurchase, int promotionGet, int decreasePromotionStock) {
         //given
         Promotion promotion = new Promotion("우도땅콩축제", PromotionType.valueOf(promotionName), pastDate, futureDate);
-        Product product = new Product("땅콩", 1000, 100, promotionStock, promotion);
+        Product product = Product.of("땅콩", 1000, 100, promotionStock, promotion);
         PurchaseInfo purchaseInfo = PurchaseInfo.of(product, purchaseAmount);
 
         //when
@@ -90,7 +90,7 @@ class PurchaseTypeTest {
                                    int totalPurchase, int promotionGet, int decreasePromotionStock) {
         //given
         Promotion promotion = new Promotion("우도땅콩축제", PromotionType.valueOf(promotionName), pastDate, futureDate);
-        Product product = new Product("땅콩", 1000, 100, promotionStock, promotion);
+        Product product = Product.of("땅콩", 1000, 100, promotionStock, promotion);
         PurchaseInfo purchaseInfo = PurchaseInfo.of(product, purchaseAmount);
 
         //when
@@ -121,7 +121,7 @@ class PurchaseTypeTest {
                                        int totalPurchase, int promotionGet, int decreasePromotionStock) {
         //given
         Promotion promotion = new Promotion("우도땅콩축제", PromotionType.valueOf(promotionName), pastDate, futureDate);
-        Product product = new Product("땅콩", 1000, 100, promotionStock, promotion);
+        Product product = Product.of("땅콩", 1000, 100, promotionStock, promotion);
         PurchaseInfo purchaseInfo = PurchaseInfo.of(product, purchaseAmount);
 
         //when
@@ -154,7 +154,7 @@ class PurchaseTypeTest {
                                             int totalPurchase, int promotionGet, int decreasePromotionStock) {
         //given
         Promotion promotion = new Promotion("우도땅콩축제", PromotionType.valueOf(promotionName), pastDate, futureDate);
-        Product product = new Product("땅콩", 1000, 100, promotionStock, promotion);
+        Product product = Product.of("땅콩", 1000, 100, promotionStock, promotion);
         PurchaseInfo purchaseInfo = PurchaseInfo.of(product, purchaseAmount);
 
         //when
@@ -187,7 +187,7 @@ class PurchaseTypeTest {
                                              int totalPurchase, int promotionGet, int decreasePromotionStock) {
         //given
         Promotion promotion = new Promotion("우도땅콩축제", PromotionType.valueOf(promotionName), pastDate, futureDate);
-        Product product = new Product("땅콩", 1000, 100, promotionStock, promotion);
+        Product product = Product.of("땅콩", 1000, 100, promotionStock, promotion);
         PurchaseInfo purchaseInfo = PurchaseInfo.of(product, purchaseAmount);
 
         //when
