@@ -22,6 +22,10 @@ public enum StoreExceptions {
             "파일 쓰기 중 오류가 발생했습니다.",
             IllegalStateException.class
     ),
+    APPLICATION_LOAD_FAIL(
+            "애플리케이션 로드 중 오류가 발생하였습니다.",
+            RuntimeException.class
+    ),
     ;
 
     private final String message;
