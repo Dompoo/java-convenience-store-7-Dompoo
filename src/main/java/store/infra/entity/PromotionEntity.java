@@ -33,7 +33,8 @@ public record PromotionEntity(
                     promotion.getName(),
                     promotion.getPromotionBuy(),
                     promotion.getPromotionGet(),
-                    promotion.getStartDate(), promotion.getEndDate())
+                    promotion.getStartDate(),
+                    promotion.getEndDate())
             );
         }
         return Optional.empty();
