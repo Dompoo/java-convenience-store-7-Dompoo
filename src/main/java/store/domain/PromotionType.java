@@ -1,6 +1,7 @@
 package store.domain;
 
 import java.util.Arrays;
+import store.common.exception.StoreExceptions;
 
 public enum PromotionType {
 
@@ -21,7 +22,7 @@ public enum PromotionType {
         return Arrays.stream(PromotionType.values())
                 .filter(promotionType -> promotionType.buy == buy && promotionType.get == get)
                 .findFirst()
-                .orElse(PromotionType.NO_PROMOTION);
+                .orElseThrow(StoreExceptions.ILLEGAL_ARGUMENT::get);
     }
 
     public int getPromotionUnit() {
