@@ -18,6 +18,10 @@ public enum StoreExceptions {
             "재고 수량을 초과하여 구매할 수 없습니다. 다시 입력해 주세요.",
             IllegalArgumentException.class
     ),
+    OVER_MAX_RETRY_ATTEPMT(
+            "최대 재시도 회수를 초과했습니다.",
+            IllegalStateException.class
+    ),
     FILE_NOT_READABLE(
             "파일 읽기 중 오류가 발생했습니다.",
             IllegalStateException.class
