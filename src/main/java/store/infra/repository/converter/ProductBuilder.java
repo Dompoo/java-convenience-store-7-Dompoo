@@ -1,9 +1,7 @@
 package store.infra.repository.converter;
 
-import java.time.LocalDate;
 import store.domain.Product;
 import store.domain.Promotion;
-import store.domain.PromotionType;
 import store.infra.entity.PromotionEntity;
 
 public class ProductBuilder {
@@ -12,16 +10,7 @@ public class ProductBuilder {
     private int price;
     private int defaultStock;
     private int promotionStock;
-    private Promotion promotion;
-
-    public ProductBuilder(final LocalDate now) {
-        this.promotion = new Promotion(
-                "",
-                PromotionType.NO_PROMOTION,
-                now.minusDays(10),
-                now.minusDays(10)
-        );
-    }
+    private Promotion promotion = Promotion.getNoPromotion();
 
     public ProductBuilder setName(final String name) {
         this.name = name;
@@ -44,12 +33,7 @@ public class ProductBuilder {
     }
 
     public ProductBuilder setPromotion(final PromotionEntity promotionEntity) {
-        this.promotion = new Promotion(
-                promotionEntity.name(),
-                PromotionType.of(promotionEntity.buy(), promotionEntity.get()),
-                promotionEntity.startDate(),
-                promotionEntity.endDate()
-        );
+        this.promotion = Promotion.of(promotionEntity.name(), promotionEntity.buy(), promotionEntity.get());
         return this;
     }
 

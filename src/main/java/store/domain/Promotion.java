@@ -1,34 +1,33 @@
 package store.domain;
 
-import java.time.LocalDate;
 import store.common.ParamsValidator;
-import store.common.exception.StoreExceptions;
 
 final public class Promotion {
 
+    private static final String NO_PROMOTION_NAME = "";
+
     private final String name;
     private final PromotionType promotionType;
-    private final LocalDate startDate;
-    private final LocalDate endDate;
 
-    public Promotion(
+    private Promotion(
             final String name,
-            final PromotionType promotionType,
-            final LocalDate startDate,
-            final LocalDate endDate
+            final PromotionType promotionType
     ) {
-        ParamsValidator.validateParamsNotNull(name, promotionType, startDate, endDate);
-        validate(startDate, endDate);
+        ParamsValidator.validateParamsNotNull(name, promotionType);
         this.name = name;
         this.promotionType = promotionType;
-        this.startDate = startDate;
-        this.endDate = endDate;
     }
 
-    private static void validate(LocalDate startDate, LocalDate endDate) {
-        if (endDate.isBefore(startDate)) {
-            throw StoreExceptions.ILLEGAL_ARGUMENT.get();
-        }
+    public static Promotion of(
+            final String name,
+            final int buy,
+            final int get
+    ) {
+        return new Promotion(name, PromotionType.of(buy, get));
+    }
+
+    public static Promotion getNoPromotion() {
+        return new Promotion(NO_PROMOTION_NAME, PromotionType.NO_PROMOTION);
     }
 
     public boolean hasPromotion() {
@@ -49,13 +48,5 @@ final public class Promotion {
 
     public int getPromotionGet() {
         return this.promotionType.getGet();
-    }
-
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public LocalDate getEndDate() {
-        return endDate;
     }
 }

@@ -4,16 +4,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.time.LocalDate;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class PromotionTest {
-
-    private static final LocalDate futureDate = LocalDate.now().plusDays(10);
-    private static final LocalDate pastDate = LocalDate.now().minusDays(10);
 
     @Nested
     class 프로모션_생성_테스트 {
@@ -22,10 +18,11 @@ class PromotionTest {
         void 정상적으로_생성한다() {
             //given
             String name = "프로모션이름";
-            PromotionType promotionType = PromotionType.BUY_ONE_GET_ONE;
+            int buy = 1;
+            int get = 1;
 
             //expected
-            assertThatCode(() -> new Promotion(name, promotionType, pastDate, futureDate))
+            assertThatCode(() -> Promotion.of(name, buy, get))
                     .doesNotThrowAnyException();
         }
 
@@ -33,58 +30,11 @@ class PromotionTest {
         void 이름이_null이면_예외가_발생한다() {
             //given
             String name = null;
-            PromotionType promotionType = PromotionType.BUY_ONE_GET_ONE;
+            int buy = 1;
+            int get = 1;
 
             //expected
-            assertThatThrownBy(() -> new Promotion(name, promotionType, pastDate, futureDate))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage("잘못된 입력입니다. 다시 입력해 주세요.");
-        }
-
-        @Test
-        void 타입이_null이면_예외가_발생한다() {
-            //given
-            String name = "프로모션이름";
-            PromotionType promotionType = null;
-
-            //expected
-            assertThatThrownBy(() -> new Promotion(name, promotionType, pastDate, futureDate))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage("잘못된 입력입니다. 다시 입력해 주세요.");
-        }
-
-        @Test
-        void 시작날짜가_null이면_예외가_발생한다() {
-            //given
-            String name = "프로모션이름";
-            PromotionType promotionType = PromotionType.BUY_ONE_GET_ONE;
-
-            //expected
-            assertThatThrownBy(() -> new Promotion(name, promotionType, null, futureDate))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage("잘못된 입력입니다. 다시 입력해 주세요.");
-        }
-
-        @Test
-        void 종료날짜가_null이면_예외가_발생한다() {
-            //given
-            String name = "프로모션이름";
-            PromotionType promotionType = PromotionType.BUY_ONE_GET_ONE;
-
-            //expected
-            assertThatThrownBy(() -> new Promotion(name, promotionType, pastDate, null))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage("잘못된 입력입니다. 다시 입력해 주세요.");
-        }
-
-        @Test
-        void 종료날짜가_시작날짜보다_미래면_예외가_발생한다() {
-            //given
-            String name = "프로모션이름";
-            PromotionType promotionType = PromotionType.BUY_ONE_GET_ONE;
-
-            //expected
-            assertThatThrownBy(() -> new Promotion(name, promotionType, futureDate, pastDate))
+            assertThatThrownBy(() -> Promotion.of(name, buy, get))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage("잘못된 입력입니다. 다시 입력해 주세요.");
         }
@@ -96,7 +46,7 @@ class PromotionTest {
         @Test
         void 프로모션이_존재하지_않는_타입이면_불가능하다() {
             //given
-            Promotion sut = new Promotion("프로모션이름", PromotionType.NO_PROMOTION, pastDate, futureDate);
+            Promotion sut = Promotion.getNoPromotion();
 
             //when
             boolean result = sut.hasPromotion();
@@ -107,13 +57,12 @@ class PromotionTest {
 
         @ParameterizedTest
         @CsvSource({
-                "BUY_ONE_GET_ONE",
-                "BUY_TWO_GET_ONE",
+                "1, 1",
+                "2, 1",
         })
-        void 프로모션이_존재하지_않는_타입이_아니면_가능하다(String promotionTypeName) {
+        void 프로모션이_존재하지_않는_타입이_아니면_가능하다(int buy, int get) {
             //given
-            PromotionType promotionType = PromotionType.valueOf(promotionTypeName);
-            Promotion sut = new Promotion("프로모션이름", promotionType, pastDate, futureDate);
+            Promotion sut = Promotion.of("프로모션이름", buy, get);
 
             //when
             boolean result = sut.hasPromotion();

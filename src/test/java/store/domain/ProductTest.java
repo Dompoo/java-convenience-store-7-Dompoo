@@ -26,7 +26,7 @@ class ProductTest {
             int price = 1000;
             int defaultStock = 10;
             int promotionStock = 10;
-            Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_ONE_GET_ONE, pastDate, futureDate);
+            Promotion promotion = Promotion.of("우도땅콩축제", 1, 1);
 
             //expected
             assertThatCode(() -> Product.of(name, price, defaultStock, promotionStock, promotion))
@@ -40,7 +40,7 @@ class ProductTest {
             int price = 1000;
             int defaultStock = 10;
             int promotionStock = 10;
-            Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_ONE_GET_ONE, pastDate, futureDate);
+            Promotion promotion = Promotion.of("우도땅콩축제", 1, 1);
 
             //expected
             assertThatThrownBy(() -> Product.of(name, price, defaultStock, promotionStock, promotion))
@@ -55,7 +55,7 @@ class ProductTest {
             int price = 1000;
             int defaultStock = 10;
             int promotionStock = 10;
-            Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_ONE_GET_ONE, pastDate, futureDate);
+            Promotion promotion = Promotion.of("우도땅콩축제", 1, 1);
 
             //expected
             assertThatThrownBy(() -> Product.of(name, price, defaultStock, promotionStock, promotion))
@@ -70,7 +70,7 @@ class ProductTest {
             int price = -1;
             int defaultStock = 10;
             int promotionStock = 10;
-            Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_ONE_GET_ONE, pastDate, futureDate);
+            Promotion promotion = Promotion.of("우도땅콩축제", 1, 1);
 
             //expected
             assertThatThrownBy(() -> Product.of(name, price, defaultStock, promotionStock, promotion))
@@ -85,7 +85,7 @@ class ProductTest {
             int price = 1000;
             int defaultStock = -1;
             int promotionStock = 10;
-            Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_ONE_GET_ONE, pastDate, futureDate);
+            Promotion promotion = Promotion.of("우도땅콩축제", 1, 1);
 
             //expected
             assertThatThrownBy(() -> Product.of(name, price, defaultStock, promotionStock, promotion))
@@ -100,7 +100,7 @@ class ProductTest {
             int price = 1000;
             int defaultStock = 10;
             int promotionStock = -1;
-            Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_ONE_GET_ONE, pastDate, futureDate);
+            Promotion promotion = Promotion.of("우도땅콩축제", 1, 1);
 
             //expected
             assertThatThrownBy(() -> Product.of(name, price, defaultStock, promotionStock, promotion))
@@ -115,7 +115,7 @@ class ProductTest {
         @Test
         void 상품_재고를_차감하면_그대로_반영된다() {
             //given
-            Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_ONE_GET_ONE, pastDate, futureDate);
+            Promotion promotion = Promotion.of("우도땅콩축제", 1, 1);
             Product sut = Product.of("우도땅콩", 1000, 10, 10, promotion);
 
             //when
@@ -137,7 +137,7 @@ class ProductTest {
         })
         void 정확한_프로모션단위로_요청한다(int purchaseAmount) {
             //given
-            Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_TWO_GET_ONE, pastDate, futureDate);
+            Promotion promotion = Promotion.of("우도땅콩축제", 2, 1);
             Product sut = Product.of("우도땅콩", 1000, 10, 10, promotion);
 
             //when
@@ -153,7 +153,7 @@ class ProductTest {
         })
         void 정확한_프로모션단위로가_아니도록_요청한다(int purchaseAmount) {
             //given
-            Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_TWO_GET_ONE, pastDate, futureDate);
+            Promotion promotion = Promotion.of("우도땅콩축제", 2, 1);
             Product sut = Product.of("우도땅콩", 1000, 10, 10, promotion);
 
             //when
@@ -173,7 +173,7 @@ class ProductTest {
         })
         void 무료_상품을_받을_수_있는_수량으로_요청한다(int purchaseAmount) {
             //given
-            Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_TWO_GET_ONE, pastDate, futureDate);
+            Promotion promotion = Promotion.of("우도땅콩축제", 2, 1);
             Product sut = Product.of("우도땅콩", 1000, 10, 10, promotion);
 
             //when
@@ -189,7 +189,7 @@ class ProductTest {
         })
         void 무료_상품을_받을_수_없는_수량으로_요청한다(int purchaseAmount) {
             //given
-            Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_TWO_GET_ONE, pastDate, futureDate);
+            Promotion promotion = Promotion.of("우도땅콩축제", 2, 1);
             Product sut = Product.of("우도땅콩", 1000, 10, 10, promotion);
 
             //when
@@ -205,7 +205,7 @@ class ProductTest {
         })
         void 프로모션이_없다면_항상_불가능하다(int purchaseAmount) {
             //given
-            Promotion promotion = new Promotion("", PromotionType.NO_PROMOTION, pastDate, pastDate);
+            Promotion promotion = Promotion.getNoPromotion();
             Product sut = Product.of("우도땅콩", 1000, 10, 10, promotion);
 
             //when
@@ -237,7 +237,7 @@ class ProductTest {
         })
         void 프로모션으로_추가_무료로_얻을_수_있는_상품_개수를_계산한다(int purchaseAmount, int freeProducts) {
             //given
-            Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_TWO_GET_ONE, pastDate, futureDate);
+            Promotion promotion = Promotion.of("우도땅콩축제", 2, 1);
             Product sut = Product.of("우도땅콩", 1000, 10, 10, promotion);
 
             //when
@@ -269,7 +269,7 @@ class ProductTest {
         })
         void 프로모션으로_구매하지_못하는_상품_개수를_계산한다(int purchaseAmount, int noPromtions) {
             //given
-            Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_TWO_GET_ONE, pastDate, futureDate);
+            Promotion promotion = Promotion.of("우도땅콩축제", 2, 1);
             Product sut = Product.of("우도땅콩", 1000, 10, 10, promotion);
 
             //when

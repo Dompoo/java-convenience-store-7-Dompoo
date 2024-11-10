@@ -3,7 +3,6 @@ package store.service.purchaseService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.time.LocalDate;
 import java.util.List;
 import org.assertj.core.groups.Tuple;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,15 +13,11 @@ import org.junit.jupiter.params.provider.CsvSource;
 import store.common.dto.request.PurchaseRequest;
 import store.domain.Product;
 import store.domain.Promotion;
-import store.domain.PromotionType;
 import store.domain.PurchaseType;
 import store.domain.vo.PurchaseResult;
 import store.testUtil.testDouble.ProductRepositoryFake;
 
 class DefaultPurchaseInfoServiceTest {
-
-    private final LocalDate pastDate = LocalDate.now().minusDays(10);
-    private final LocalDate futureDate = LocalDate.now().plusDays(10);
 
     private ProductRepositoryFake productRepositoryFake;
     private DefaultPurchaseService sut;
@@ -39,8 +34,8 @@ class DefaultPurchaseInfoServiceTest {
         @Test
         void 재고가_충분한_요청을_가져온다() {
             //given
-            Promotion promotion1 = new Promotion("우도땅콩축제", PromotionType.BUY_ONE_GET_ONE, pastDate, futureDate);
-            Promotion promotion2 = new Promotion("", PromotionType.NO_PROMOTION, pastDate, pastDate);
+            Promotion promotion1 = Promotion.of("우도땅콩축제", 1, 1);
+            Promotion promotion2 = Promotion.getNoPromotion();
             Product product1 = Product.of("우도땅콩", 1000, 10, 9, promotion1);
             Product product2 = Product.of("빼빼로", 500, 10, 0, promotion2);
             productRepositoryFake.setProducts(product1, product2);
@@ -64,8 +59,8 @@ class DefaultPurchaseInfoServiceTest {
         @Test
         void 재고가_부족한_요청을_가져온다() {
             //given
-            Promotion promotion1 = new Promotion("우도땅콩축제", PromotionType.BUY_ONE_GET_ONE, pastDate, futureDate);
-            Promotion promotion2 = new Promotion("", PromotionType.NO_PROMOTION, pastDate, pastDate);
+            Promotion promotion1 = Promotion.of("우도땅콩축제", 1, 1);
+            Promotion promotion2 = Promotion.getNoPromotion();
             Product product1 = Product.of("우도땅콩", 1000, 9, 9, promotion1);
             Product product2 = Product.of("빼빼로", 500, 9, 0, promotion2);
             productRepositoryFake.setProducts(product1, product2);
@@ -98,7 +93,7 @@ class DefaultPurchaseInfoServiceTest {
                 int promotionGetAmount
         ) {
             //given
-            Promotion promotion = new Promotion("우도땅콩축제", PromotionType.NO_PROMOTION, pastDate, futureDate);
+            Promotion promotion = Promotion.of("우도땅콩축제", 1, 1);
             Product product = Product.of("우도땅콩", 1000, 9, 9, promotion);
             productRepositoryFake.setProducts(product);
 
@@ -129,7 +124,7 @@ class DefaultPurchaseInfoServiceTest {
                 int promotionGetAmount
         ) {
             //given
-            Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_TWO_GET_ONE, pastDate, futureDate);
+            Promotion promotion = Promotion.of("우도땅콩축제", 2, 1);
             Product product = Product.of("우도땅콩", 1000, 9, 9, promotion);
             productRepositoryFake.setProducts(product);
 
@@ -160,7 +155,7 @@ class DefaultPurchaseInfoServiceTest {
                 int promotionGetAmount
         ) {
             //given
-            Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_TWO_GET_ONE, pastDate, futureDate);
+            Promotion promotion = Promotion.of("우도땅콩축제", 2, 1);
             Product product = Product.of("우도땅콩", 1000, 9, 9, promotion);
             productRepositoryFake.setProducts(product);
 
@@ -191,7 +186,7 @@ class DefaultPurchaseInfoServiceTest {
                 int promotionGetAmount
         ) {
             //given
-            Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_TWO_GET_ONE, pastDate, futureDate);
+            Promotion promotion = Promotion.of("우도땅콩축제", 2, 1);
             Product product = Product.of("우도땅콩", 1000, 9, 9, promotion);
             productRepositoryFake.setProducts(product);
 
@@ -225,7 +220,7 @@ class DefaultPurchaseInfoServiceTest {
                 int promotionGetAmount
         ) {
             //given
-            Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_TWO_GET_ONE, pastDate, futureDate);
+            Promotion promotion = Promotion.of("우도땅콩축제", 2, 1);
             Product product = Product.of("우도땅콩", 1000, 9, 9, promotion);
             productRepositoryFake.setProducts(product);
 
@@ -259,7 +254,7 @@ class DefaultPurchaseInfoServiceTest {
                 int promotionGetAmount
         ) {
             //given
-            Promotion promotion = new Promotion("우도땅콩축제", PromotionType.BUY_TWO_GET_ONE, pastDate, futureDate);
+            Promotion promotion = Promotion.of("우도땅콩축제", 2, 1);
             Product product = Product.of("우도땅콩", 1000, 9, 9, promotion);
             productRepositoryFake.setProducts(product);
 

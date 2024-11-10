@@ -17,7 +17,6 @@ import store.infra.repository.converter.ProductConverter;
 class ProductConverterTest {
 
     private final LocalDate pastDate = LocalDate.now().minusDays(10);
-    private final LocalDate now = LocalDate.now();
     private final LocalDate futureDate = LocalDate.now().plusDays(10);
     private ProductConverter sut;
 
@@ -48,7 +47,7 @@ class ProductConverterTest {
             );
 
             //when
-            List<Product> result = sut.convert(productEntities, promotions, now);
+            List<Product> result = sut.convert(productEntities, promotions);
 
             //then
             assertThat(result).extracting(

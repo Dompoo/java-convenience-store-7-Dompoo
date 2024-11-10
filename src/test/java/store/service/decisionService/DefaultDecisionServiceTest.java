@@ -3,7 +3,6 @@ package store.service.decisionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import java.time.LocalDate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -13,7 +12,6 @@ import store.common.dto.request.PurchaseRequest;
 import store.domain.DecisionType;
 import store.domain.Product;
 import store.domain.Promotion;
-import store.domain.PromotionType;
 import store.domain.PurchaseType;
 import store.domain.membership.Membership;
 import store.domain.membership.NoMembership;
@@ -21,9 +19,6 @@ import store.domain.membership.RatioMembership;
 import store.testUtil.testDouble.ProductRepositoryFake;
 
 class DefaultDecisionServiceTest {
-
-    private final LocalDate pastDate = LocalDate.now().minusDays(10);
-    private final LocalDate futureDate = LocalDate.now().plusDays(10);
 
     private ProductRepositoryFake productRepositoryFake;
     private DefaultDecisionService sut;
@@ -43,7 +38,7 @@ class DefaultDecisionServiceTest {
         })
         void 프로모션이_없는_상품을_구매하는_유형(int purchaseAmount) {
             //given
-            Promotion promotion = new Promotion("", PromotionType.NO_PROMOTION, pastDate, pastDate);
+            Promotion promotion = Promotion.getNoPromotion();
             Product product = Product.of("감자", 1000, 10, 13, promotion);
             productRepositoryFake.setProducts(product);
             PurchaseRequest purchaseRequest = new PurchaseRequest("감자", purchaseAmount);
@@ -61,7 +56,7 @@ class DefaultDecisionServiceTest {
         })
         void 프로모션_단위에_딱_맞게_가져오는_유형(int purchaseAmount) {
             //given
-            Promotion promotion = new Promotion("감자1+2", PromotionType.BUY_TWO_GET_ONE, pastDate, futureDate);
+            Promotion promotion = Promotion.of("감자2+1", 2, 1);
             Product product = Product.of("감자", 1000, 10, 13, promotion);
             productRepositoryFake.setProducts(product);
             PurchaseRequest purchaseRequest = new PurchaseRequest("감자", purchaseAmount);
@@ -79,7 +74,7 @@ class DefaultDecisionServiceTest {
         })
         void 프로모션_상품을_무료로_받을_수_있는_유형(int purchaseAmount) {
             //given
-            Promotion promotion = new Promotion("감자1+2", PromotionType.BUY_TWO_GET_ONE, pastDate, futureDate);
+            Promotion promotion = Promotion.of("감자2+1", 2, 1);
             Product product = Product.of("감자", 1000, 10, 13, promotion);
             productRepositoryFake.setProducts(product);
             PurchaseRequest purchaseRequest = new PurchaseRequest("감자", purchaseAmount);
@@ -97,7 +92,7 @@ class DefaultDecisionServiceTest {
         })
         void 프로모션이_있지만_불가능하게_상품을_가져온_경우(int purchaseAmount) {
             //given
-            Promotion promotion = new Promotion("감자1+2", PromotionType.BUY_TWO_GET_ONE, pastDate, futureDate);
+            Promotion promotion = Promotion.of("감자2+1", 2, 1);
             Product product = Product.of("감자", 1000, 10, 11, promotion);
             productRepositoryFake.setProducts(product);
             PurchaseRequest purchaseRequest = new PurchaseRequest("감자", purchaseAmount);
@@ -115,7 +110,7 @@ class DefaultDecisionServiceTest {
         })
         void 전체_재고보다_많이_구매하는_유형(int purchaseAmount) {
             //given
-            Promotion promotion = new Promotion("감자1+2", PromotionType.BUY_TWO_GET_ONE, pastDate, futureDate);
+            Promotion promotion = Promotion.of("감자2+1", 2, 1);
             Product product = Product.of("감자", 1000, 10, 11, promotion);
             productRepositoryFake.setProducts(product);
             PurchaseRequest purchaseRequest = new PurchaseRequest("감자", purchaseAmount);
@@ -136,7 +131,7 @@ class DefaultDecisionServiceTest {
         })
         void 프로모션이_없는_상품을_구매한다(int purchaseAmount) {
             //given
-            Promotion promotion = new Promotion("감자1+2", PromotionType.NO_PROMOTION, pastDate, futureDate);
+            Promotion promotion = Promotion.of("감자2+1", 2, 1);
             Product product = Product.of("감자", 1000, 10, 11, promotion);
             productRepositoryFake.setProducts(product);
 
@@ -158,7 +153,7 @@ class DefaultDecisionServiceTest {
         })
         void 프로모션_단위와_딱_맞게_구매한다(int purchaseAmount) {
             //given
-            Promotion promotion = new Promotion("감자1+2", PromotionType.BUY_TWO_GET_ONE, pastDate, futureDate);
+            Promotion promotion = Promotion.of("감자2+1", 2, 1);
             Product product = Product.of("감자", 1000, 10, 11, promotion);
             productRepositoryFake.setProducts(product);
 
@@ -180,7 +175,7 @@ class DefaultDecisionServiceTest {
         })
         void 무료로_프로모션_상품을_받을_수_있을_때_이를_거절한다(int purchaseAmount) {
             //given
-            Promotion promotion = new Promotion("감자1+2", PromotionType.BUY_TWO_GET_ONE, pastDate, futureDate);
+            Promotion promotion = Promotion.of("감자2+1", 2, 1);
             Product product = Product.of("감자", 1000, 10, 11, promotion);
             productRepositoryFake.setProducts(product);
 
@@ -202,7 +197,7 @@ class DefaultDecisionServiceTest {
         })
         void 무료로_프로모션_상품을_받을_수_있을_때_이를_승인한다(int purchaseAmount) {
             //given
-            Promotion promotion = new Promotion("감자1+2", PromotionType.BUY_TWO_GET_ONE, pastDate, futureDate);
+            Promotion promotion = Promotion.of("감자2+1", 2, 1);
             Product product = Product.of("감자", 1000, 10, 11, promotion);
             productRepositoryFake.setProducts(product);
 
@@ -224,7 +219,7 @@ class DefaultDecisionServiceTest {
         })
         void 프로모션이_불가능하게_가져왔을_때_돌려놓는다(int purchaseAmount) {
             //given
-            Promotion promotion = new Promotion("감자1+2", PromotionType.BUY_TWO_GET_ONE, pastDate, futureDate);
+            Promotion promotion = Promotion.of("감자2+1", 2, 1);
             Product product = Product.of("감자", 1000, 10, 11, promotion);
             productRepositoryFake.setProducts(product);
 
@@ -246,7 +241,7 @@ class DefaultDecisionServiceTest {
         })
         void 프로모션이_불가능하게_가져왔을_때_그대로_구매한다(int purchaseAmount) {
             //given
-            Promotion promotion = new Promotion("감자1+2", PromotionType.BUY_TWO_GET_ONE, pastDate, futureDate);
+            Promotion promotion = Promotion.of("감자2+1", 2, 1);
             Product product = Product.of("감자", 1000, 10, 11, promotion);
             productRepositoryFake.setProducts(product);
 

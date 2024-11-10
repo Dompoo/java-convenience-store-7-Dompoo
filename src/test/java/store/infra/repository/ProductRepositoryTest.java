@@ -122,7 +122,7 @@ class ProductRepositoryTest {
         @Test
         void 새로운_상품을_업데이트한다() {
             //given
-            Promotion promotion = new Promotion("새로운상품프로모션", PromotionType.BUY_ONE_GET_ONE, pastDate, futureDate);
+            Promotion promotion = Promotion.of("새로운상품프로모션", 1, 1);
             Product product = Product.of("콜라", 1500, 10, 10, promotion);
 
             //when

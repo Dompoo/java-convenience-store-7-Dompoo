@@ -2,25 +2,21 @@ package store.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.time.LocalDate;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class DecisionTypeTest {
 
-    private static final LocalDate pastDate = LocalDate.now().minusDays(10);
-    private static final LocalDate futureDate = LocalDate.now().plusDays(10);
-
     @ParameterizedTest
     @CsvSource({
-            "1, 0, BUY_ONE_GET_ONE",
-            "2, 0, BUY_ONE_GET_ONE",
-            "3, 0, BUY_ONE_GET_ONE",
-            "4, 0, BUY_ONE_GET_ONE",
+            "1, 0, 1, 1",
+            "2, 0, 1, 1",
+            "3, 0, 1, 1",
+            "4, 0, 1, 1",
     })
-    void 프로모션_재고가_없으면_그냥_구매한다(int purchaseAmount, int promotionStock, String promotionName) {
+    void 프로모션_재고가_없으면_그냥_구매한다(int purchaseAmount, int promotionStock, int buy, int get) {
         //given
-        Promotion promotion = new Promotion("우도땅콩축제", PromotionType.valueOf(promotionName), pastDate, futureDate);
+        Promotion promotion = Promotion.of("우도땅콩축제", buy, get);
         Product product = Product.of("땅콩", 1000, 100, promotionStock, promotion);
 
         //when
@@ -32,20 +28,20 @@ class DecisionTypeTest {
 
     @ParameterizedTest
     @CsvSource({
-            "3, 13, BUY_TWO_GET_ONE",
-            "6, 13, BUY_TWO_GET_ONE",
-            "9, 13, BUY_TWO_GET_ONE",
-            "12, 13, BUY_TWO_GET_ONE",
-            "2, 13, BUY_ONE_GET_ONE",
-            "4, 13, BUY_ONE_GET_ONE",
-            "6, 13, BUY_ONE_GET_ONE",
-            "8, 13, BUY_ONE_GET_ONE",
-            "10, 13, BUY_ONE_GET_ONE",
-            "12, 13, BUY_ONE_GET_ONE",
+            "3, 13, 2, 1",
+            "6, 13, 2, 1",
+            "9, 13, 2, 1",
+            "12, 13, 2, 1",
+            "2, 13, 1, 1",
+            "4, 13, 1, 1",
+            "6, 13, 1, 1",
+            "8, 13, 1, 1",
+            "10, 13, 1, 1",
+            "12, 13, 1, 1",
     })
-    void 프로모션_단위에_딱_맞게_구매한다(int purchaseAmount, int promotionStock, String promotionName) {
+    void 프로모션_단위에_딱_맞게_구매한다(int purchaseAmount, int promotionStock, int buy, int get) {
         //given
-        Promotion promotion = new Promotion("우도땅콩축제", PromotionType.valueOf(promotionName), pastDate, futureDate);
+        Promotion promotion = Promotion.of("우도땅콩축제", buy, get);
         Product product = Product.of("땅콩", 1000, 100, promotionStock, promotion);
 
         //when
@@ -57,20 +53,20 @@ class DecisionTypeTest {
 
     @ParameterizedTest
     @CsvSource({
-            "2, 13, BUY_TWO_GET_ONE",
-            "5, 13, BUY_TWO_GET_ONE",
-            "8, 13, BUY_TWO_GET_ONE",
-            "11, 13, BUY_TWO_GET_ONE",
-            "1, 13, BUY_ONE_GET_ONE",
-            "3, 13, BUY_ONE_GET_ONE",
-            "5, 13, BUY_ONE_GET_ONE",
-            "7, 13, BUY_ONE_GET_ONE",
-            "9, 13, BUY_ONE_GET_ONE",
-            "11, 13, BUY_ONE_GET_ONE",
+            "2, 13, 2, 1",
+            "5, 13, 2, 1",
+            "8, 13, 2, 1",
+            "11, 13, 2, 1",
+            "1, 13, 1, 1",
+            "3, 13, 1, 1",
+            "5, 13, 1, 1",
+            "7, 13, 1, 1",
+            "9, 13, 1, 1",
+            "11, 13, 1, 1",
     })
-    void 무료로_프로모션_가져갈_수_있게_구매한다(int purchaseAmount, int promotionStock, String promotionName) {
+    void 무료로_프로모션_가져갈_수_있게_구매한다(int purchaseAmount, int promotionStock, int buy, int get) {
         //given
-        Promotion promotion = new Promotion("우도땅콩축제", PromotionType.valueOf(promotionName), pastDate, futureDate);
+        Promotion promotion = Promotion.of("우도땅콩축제", buy, get);
         Product product = Product.of("땅콩", 1000, 100, promotionStock, promotion);
 
         //when
@@ -82,22 +78,22 @@ class DecisionTypeTest {
 
     @ParameterizedTest
     @CsvSource({
-            "1, 13, BUY_TWO_GET_ONE",
-            "4, 13, BUY_TWO_GET_ONE",
-            "7, 13, BUY_TWO_GET_ONE",
-            "10, 13, BUY_TWO_GET_ONE",
-            "13, 13, BUY_TWO_GET_ONE",
-            "14, 13, BUY_TWO_GET_ONE",
-            "15, 13, BUY_TWO_GET_ONE",
-            "16, 13, BUY_TWO_GET_ONE",
-            "13, 13, BUY_ONE_GET_ONE",
-            "14, 13, BUY_ONE_GET_ONE",
-            "15, 13, BUY_ONE_GET_ONE",
-            "16, 13, BUY_ONE_GET_ONE",
+            "1, 13, 2, 1",
+            "4, 13, 2, 1",
+            "7, 13, 2, 1",
+            "10, 13, 2, 1",
+            "13, 13, 2, 1",
+            "14, 13, 2, 1",
+            "15, 13, 2, 1",
+            "16, 13, 2, 1",
+            "13, 13, 1, 1",
+            "14, 13, 1, 1",
+            "15, 13, 1, 1",
+            "16, 13, 1, 1",
     })
-    void 일부는_정가로_구매해야_하도록_구매한다(int purchaseAmount, int promotionStock, String promotionName) {
+    void 일부는_정가로_구매해야_하도록_구매한다(int purchaseAmount, int promotionStock, int buy, int get) {
         //given
-        Promotion promotion = new Promotion("우도땅콩축제", PromotionType.valueOf(promotionName), pastDate, futureDate);
+        Promotion promotion = Promotion.of("우도땅콩축제", buy, get);
         Product product = Product.of("땅콩", 1000, 100, promotionStock, promotion);
 
         //when

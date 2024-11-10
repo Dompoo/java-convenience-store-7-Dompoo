@@ -13,15 +13,14 @@ public class ProductConverter {
 
     public List<Product> convert(
             final List<ProductEntity> productEntities,
-            final List<PromotionEntity> promotionEntities,
-            final LocalDate now
+            final List<PromotionEntity> promotionEntities
     ) {
         Map<String, PromotionEntity> promotionMap = convertPromotionEntitiesToMap(promotionEntities);
         List<ProductEntity> validProductEntities = withOnlyValidPromotionEntities(productEntities, promotionMap);
         Map<String, ProductBuilder> productMap = new HashMap<>();
         for (ProductEntity productEntity : validProductEntities) {
             productMap.put(productEntity.name(),
-                    getUpdatedProductBuilder(now, productEntity, productMap, promotionMap)
+                    getUpdatedProductBuilder(productEntity, productMap, promotionMap)
             );
         }
         return convertToProducts(productMap);
@@ -47,26 +46,24 @@ public class ProductConverter {
     }
 
     private static ProductBuilder getUpdatedProductBuilder(
-            final LocalDate now,
             final ProductEntity productEntity,
             final Map<String, ProductBuilder> productBuilderMap,
             final Map<String, PromotionEntity> promotionEntityMap
     ) {
-        ProductBuilder productBuilder = createOrGetProductBuilder(productEntity, productBuilderMap, now);
+        ProductBuilder productBuilder = createOrGetProductBuilder(productEntity, productBuilderMap);
         updateProductBuilder(productEntity, productBuilder, promotionEntityMap);
         return productBuilder;
     }
 
     private static ProductBuilder createOrGetProductBuilder(
             final ProductEntity productEntity,
-            final Map<String, ProductBuilder> products,
-            final LocalDate now
+            final Map<String, ProductBuilder> products
     ) {
         String name = productEntity.name();
         if (products.containsKey(name)) {
             return products.get(name);
         }
-        return new ProductBuilder(now)
+        return new ProductBuilder()
                 .setName(productEntity.name())
                 .setPrice(productEntity.price());
     }

@@ -24,7 +24,7 @@ public class ProductRepository implements Repository<Product> {
     ) {
         List<PromotionEntity> promotionEntities = getUniquePromotionEntities(promotionDatabase, dateProvider.getDate());
         this.products.addAll(
-                productConverter.convert(productDatabase.readAll(), promotionEntities, dateProvider.getDate())
+                productConverter.convert(productDatabase.readAll(), promotionEntities)
         );
     }
 
