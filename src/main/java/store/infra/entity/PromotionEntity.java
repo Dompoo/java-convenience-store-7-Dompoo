@@ -3,10 +3,6 @@ package store.infra.entity;
 import java.time.LocalDate;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
-import java.util.StringJoiner;
-import store.domain.Product;
-import store.domain.Promotion;
 
 public record PromotionEntity(
         String name,
@@ -16,14 +12,20 @@ public record PromotionEntity(
         LocalDate endDate
 ) implements DatabaseEntity {
 
-    public static PromotionEntity from(final Map<String, String> dataMap) {
-        String name = dataMap.get("name");
-        int buy = Integer.parseInt(dataMap.get("buy"));
-        int get = Integer.parseInt(dataMap.get("get"));
-        LocalDate startDate = LocalDate.parse(dataMap.get("start_date"));
-        LocalDate endDate = LocalDate.parse(dataMap.get("end_date"));
+    private static final String NAME_COLUMN = "name";
+    private static final String BUY_COLUMN = "buy";
+    private static final String GET_COLUMN = "get";
+    private static final String START_DATE_COLUMN = "start_date";
+    private static final String END_DATE_COLUMN = "end_date";
 
-        return new PromotionEntity(name, buy, get, startDate, endDate);
+    public static PromotionEntity from(final Map<String, String> dataMap) {
+        return new PromotionEntity(
+                dataMap.get(NAME_COLUMN),
+                Integer.parseInt(dataMap.get(BUY_COLUMN)),
+                Integer.parseInt(dataMap.get(GET_COLUMN)),
+                LocalDate.parse(dataMap.get(START_DATE_COLUMN)),
+                LocalDate.parse(dataMap.get(END_DATE_COLUMN))
+        );
     }
 
     public boolean isAvailable(final LocalDate now) {

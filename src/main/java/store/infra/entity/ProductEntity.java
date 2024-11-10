@@ -1,12 +1,7 @@
 package store.infra.entity;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.StringJoiner;
-import java.util.stream.Stream;
-import store.domain.Product;
 
 public record ProductEntity(
         String name,
@@ -15,19 +10,25 @@ public record ProductEntity(
         String promotionName
 ) implements DatabaseEntity {
 
+    private static final String NAME_COLUMN = "name";
+    private static final String PRICE_COLUMN = "price";
+    private static final String QUANTITY_COLUMN = "quantity";
+    private static final String PROMOTION_NAME_COLUMN = "promotion";
+    private static final String NO_PROMOTION_PROMOTION_NAME = "null";
+
     public static ProductEntity from(final Map<String, String> dataMap) {
-        String name = dataMap.get("name");
-        int price = Integer.parseInt(dataMap.get("price"));
-        int stock = Integer.parseInt(dataMap.get("quantity"));
-        String promotionName = dataMap.get("promotion");
-        if (promotionName.equals("null")) {
-            return new ProductEntity(name, price, stock, "");
-        }
-        return new ProductEntity(name, price, stock, promotionName);
+        return new ProductEntity(
+                dataMap.get(NAME_COLUMN),
+                Integer.parseInt(dataMap.get(PRICE_COLUMN)),
+                Integer.parseInt(dataMap.get(QUANTITY_COLUMN)),
+                dataMap.get(PROMOTION_NAME_COLUMN)
+        );
     }
 
     public boolean isPromotionStockEntity() {
-        return promotionName != null && !promotionName.isBlank();
+        return promotionName != null
+                && !promotionName.equals(NO_PROMOTION_PROMOTION_NAME)
+                && !promotionName.isBlank();
     }
 
     @Override
