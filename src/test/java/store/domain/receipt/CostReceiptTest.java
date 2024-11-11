@@ -21,7 +21,7 @@ class CostReceiptTest {
 
         //then
         assertThat(result).extracting(
-                "originalPurchaseCost", "purchaseAmount", "promotionSaleCost", "membershipSaleCost", "finalPrice"
+                "originalPurchaseCost", "totalPurchasedAmount", "promotionSaleCost", "membershipSaleCost", "finalPrice"
         ).containsExactly(
                 32500, 45, 7500, 0, 25000
         );
@@ -40,7 +40,7 @@ class CostReceiptTest {
 
         //then
         assertThat(result).extracting(
-                "originalPurchaseCost", "purchaseAmount", "promotionSaleCost", "membershipSaleCost", "finalPrice"
+                "originalPurchaseCost", "totalPurchasedAmount", "promotionSaleCost", "membershipSaleCost", "finalPrice"
         ).containsExactly(
                 32500, 45, 7500, 4500, 20500
         );

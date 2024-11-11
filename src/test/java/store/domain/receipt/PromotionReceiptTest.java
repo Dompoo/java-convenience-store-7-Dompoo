@@ -22,7 +22,7 @@ class PromotionReceiptTest {
 
         //then
         assertThat(result).extracting(
-                "productName", "purchaseAmount", "originalPrice"
+                "productName", "purchaseAmount", "unitPrice"
         ).containsExactlyInAnyOrder(
                 Tuple.tuple("땅콩", 20, 20000),
                 Tuple.tuple("빼빼로", 25, 12500)

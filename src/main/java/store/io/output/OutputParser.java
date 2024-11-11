@@ -63,7 +63,7 @@ public class OutputParser {
         if (response.purchaseAmount() == 0) {
             return "취소";
         }
-        return PRICE_FORMAT.formatted(response.originalPrice());
+        return PRICE_FORMAT.formatted(response.unitPrice());
     }
 
     public String parsePromotionedProductsResponses(
@@ -93,7 +93,7 @@ public class OutputParser {
     private static String mapOriginalPurchaseCost(final PurchaseCostResponse purchaseCostResponse) {
         return RECEIPT_OUTPUT_FORMAT.formatted(
                 "총구매액",
-                purchaseCostResponse.purchaseAmount(),
+                purchaseCostResponse.totalPurchasedAmount(),
                 PRICE_FORMAT.formatted(purchaseCostResponse.originalPurchaseCost())
         );
     }
