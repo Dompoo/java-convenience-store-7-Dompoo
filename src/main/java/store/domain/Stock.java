@@ -26,6 +26,12 @@ final public class Stock {
         }
     }
 
+    public Stock withReducing(final int totalDecreaseStock, final int promotionDecreaseStock) {
+        int newDefaultStock = defaultStock - (totalDecreaseStock - promotionDecreaseStock);
+        int newPromotionStock = promotionStock - promotionDecreaseStock;
+        return new Stock(newDefaultStock, newPromotionStock);
+    }
+
     public int getDefaultStock() {
         return defaultStock;
     }
@@ -36,12 +42,6 @@ final public class Stock {
 
     public int getTotalStock() {
         return defaultStock + promotionStock;
-    }
-
-    public Stock withReducing(final int totalDecreaseStock, final int promotionDecreaseStock) {
-        int newDefaultStock = defaultStock - (totalDecreaseStock - promotionDecreaseStock);
-        int newPromotionStock = promotionStock - promotionDecreaseStock;
-        return new Stock(newDefaultStock, newPromotionStock);
     }
 
     @Override

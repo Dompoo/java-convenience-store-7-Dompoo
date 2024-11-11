@@ -13,7 +13,7 @@ final public class CostReceipt {
     private Membership membership = new NoMembership();
 
     public void addPurchase(final PurchaseResult purchaseResult) {
-        this.purchaseResults.add(purchaseResult);
+        purchaseResults.add(purchaseResult);
     }
 
     public void applyMembership(final Membership membership) {

@@ -10,8 +10,10 @@ final public class PromotionReceipt {
     private final List<PromotionedProductResponse> promotionedProductResponses = new ArrayList<>();
 
     public void addPurchase(final PurchaseResult purchaseResult) {
-        if (purchaseResult.promotionGetAmount() == 0) return;
-        this.promotionedProductResponses.add(new PromotionedProductResponse(
+        if (purchaseResult.promotionGetAmount() == 0) {
+            return;
+        }
+        promotionedProductResponses.add(new PromotionedProductResponse(
                 purchaseResult.productName(),
                 purchaseResult.promotionGetAmount(),
                 purchaseResult.requestOrder()
@@ -19,6 +21,6 @@ final public class PromotionReceipt {
     }
 
     public List<PromotionedProductResponse> buildPromotionedProductResponses() {
-        return this.promotionedProductResponses;
+        return promotionedProductResponses;
     }
 }

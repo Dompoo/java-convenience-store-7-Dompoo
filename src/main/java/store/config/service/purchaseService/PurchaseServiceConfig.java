@@ -24,6 +24,6 @@ public class PurchaseServiceConfig {
     }
 
     public PurchaseService getPurchaseService() {
-        return this.purchaseService;
+        return purchaseService;
     }
 }

@@ -20,18 +20,18 @@ final public class Receipt {
     }
 
     public void applyMembership(final Membership membership) {
-        this.costReceipt.applyMembership(membership);
+        costReceipt.applyMembership(membership);
     }
 
     public List<PurchasedProductResponse> getPurchasedProductResponses() {
-        return this.productReceipt.buildPurchasedProductResponses();
+        return productReceipt.buildPurchasedProductResponses();
     }
 
     public List<PromotionedProductResponse> getPromotionedProductResponses() {
-        return this.promotionReceipt.buildPromotionedProductResponses();
+        return promotionReceipt.buildPromotionedProductResponses();
     }
 
     public PurchaseCostResponse getPurchaseCostResponse() {
-        return this.costReceipt.buildPurchaseCostResponse();
+        return costReceipt.buildPurchaseCostResponse();
     }
 }

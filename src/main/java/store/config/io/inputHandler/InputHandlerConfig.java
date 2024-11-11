@@ -20,6 +20,6 @@ public class InputHandlerConfig {
     }
 
     public InputHandler getInputHandler() {
-        return this.inputHandler;
+        return inputHandler;
     }
 }

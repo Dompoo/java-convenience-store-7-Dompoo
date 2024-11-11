@@ -52,11 +52,11 @@ public enum PurchaseType {
     }
 
     public PurchaseStatus proceed(final PurchaseInfo purchaseInfo) {
-        Integer promotionGetProductCount = this.promotionGetProductCountCalculator.calculate(purchaseInfo);
+        Integer promotionGetProductCount = promotionGetProductCountCalculator.calculate(purchaseInfo);
         return new PurchaseStatus(
-                this.finalPurchaseProductCountCalculator.calculate(purchaseInfo),
+                finalPurchaseProductCountCalculator.calculate(purchaseInfo),
                 promotionGetProductCount,
-                this.promotionStockToDecreaseCalculator.calculate(purchaseInfo),
+                promotionStockToDecreaseCalculator.calculate(purchaseInfo),
                 purchaseInfo.calculatePromotionedProductAmount(promotionGetProductCount)
         );
     }

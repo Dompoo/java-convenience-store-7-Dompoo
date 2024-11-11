@@ -27,6 +27,6 @@ public class DefaultProductRepositoryConfig implements ProductRepositoryConfig {
 
     @Override
     public Repository<Product> getProductRepository() {
-        return this.productRepository;
+        return productRepository;
     }
 }

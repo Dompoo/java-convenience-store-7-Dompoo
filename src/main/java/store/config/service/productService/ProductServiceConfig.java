@@ -13,6 +13,6 @@ public class ProductServiceConfig {
     }
 
     public ProductService getProductService() {
-        return this.productService;
+        return productService;
     }
 }

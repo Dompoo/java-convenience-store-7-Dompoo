@@ -13,6 +13,6 @@ public class MissionUtilsReaderConfig implements ReaderConfig {
 
     @Override
     public Reader getReader() {
-        return this.reader;
+        return reader;
     }
 }

@@ -14,6 +14,6 @@ public class ProductFileDatabaseConfig implements ProductDatabaseConfig {
 
     @Override
     public Database<ProductEntity> getProductDatabase() {
-        return this.productDatabase;
+        return productDatabase;
     }
 }

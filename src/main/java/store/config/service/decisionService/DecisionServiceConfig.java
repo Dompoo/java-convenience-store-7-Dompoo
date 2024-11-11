@@ -24,6 +24,6 @@ public class DecisionServiceConfig {
     }
 
     public DecisionService getDecisionService() {
-        return this.decisionService;
+        return decisionService;
     }
 }

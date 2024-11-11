@@ -30,6 +30,6 @@ public class DefaultControllerConfig implements ControllerConfig {
 
     @Override
     public Controller getController() {
-        return this.controller;
+        return controller;
     }
 }

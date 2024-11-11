@@ -8,7 +8,6 @@ import store.config.infra.database.ProductFileDatabaseConfig;
 import store.config.infra.database.PromotionFileDatabaseConfig;
 import store.config.infra.repository.DefaultProductRepositoryConfig;
 import store.config.infra.repository.ProductRepositoryConfig;
-import store.config.infra.repository.RepositoriesConfig;
 import store.config.io.inputHandler.InputHandlerConfig;
 import store.config.io.outputHandler.OutputHandlerConfig;
 import store.config.io.reader.MissionUtilsReaderConfig;
@@ -76,7 +75,7 @@ public class DefaultStoreApplication implements StoreApplication {
 
     @Override
     public void run() {
-        this.controller.run();
+        controller.run();
     }
 
     private record ConfigurationContext(

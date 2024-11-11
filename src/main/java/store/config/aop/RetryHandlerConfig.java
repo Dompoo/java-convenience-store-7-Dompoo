@@ -13,6 +13,6 @@ public class RetryHandlerConfig {
     }
 
     public RetryHandler getRetryHandler() {
-        return this.retryHandler;
+        return retryHandler;
     }
 }

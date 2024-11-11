@@ -13,6 +13,6 @@ public class MissionUtilsDateProviderConfig implements DateProviderConfig {
 
     @Override
     public DateProvider getDateProvider() {
-        return this.dateProvider;
+        return dateProvider;
     }
 }

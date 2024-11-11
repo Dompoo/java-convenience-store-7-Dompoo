@@ -1,8 +1,6 @@
 package store.config.infra.filePathLoader;
 
 import java.util.Objects;
-import java.util.ServiceLoader;
-import store.common.exception.StoreExceptions;
 import store.infra.filePathLoader.DefaultFilePathLoader;
 import store.infra.filePathLoader.FilePathLoader;
 

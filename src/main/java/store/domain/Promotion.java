@@ -39,14 +39,14 @@ final public class Promotion {
     }
 
     public int getPromotionUnit() {
-        return this.promotionType.getPromotionUnit();
+        return promotionType.getPromotionUnit();
     }
 
     public int getPromotionBuy() {
-        return this.promotionType.getBuy();
+        return promotionType.getBuy();
     }
 
     public int getPromotionGet() {
-        return this.promotionType.getGet();
+        return promotionType.getGet();
     }
 }

@@ -23,6 +23,6 @@ public class RePurchaseConfig implements ControllerConfig {
 
     @Override
     public Controller getController() {
-        return this.controller;
+        return controller;
     }
 }

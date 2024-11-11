@@ -10,7 +10,7 @@ final public class ProductReceipt {
     private final List<PurchasedProductResponse> purchasedProductResponses = new ArrayList<>();
 
     public void addPurchase(final PurchaseResult purchaseResult) {
-        this.purchasedProductResponses.add(new PurchasedProductResponse(
+        purchasedProductResponses.add(new PurchasedProductResponse(
                 purchaseResult.productName(),
                 purchaseResult.purchaseAmount(),
                 purchaseResult.price() * purchaseResult.purchaseAmount(),
@@ -19,6 +19,6 @@ final public class ProductReceipt {
     }
 
     public List<PurchasedProductResponse> buildPurchasedProductResponses() {
-        return this.purchasedProductResponses;
+        return purchasedProductResponses;
     }
 }

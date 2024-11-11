@@ -1,28 +1,24 @@
 package store.infra.database;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.StringJoiner;
 import store.common.exception.StoreExceptions;
 import store.infra.entity.DatabaseEntity;
 
 public abstract class FileDatabase<T extends DatabaseEntity> implements Database<T> {
 
     private static final String COLUMN_SEPARATOR = ",";
-    private static final String NEW_LINE = "\n";
 
     private final String headerLine;
 
     public FileDatabase() {
         try (BufferedReader reader = new BufferedReader(new FileReader(getFilePath()))) {
-            this.headerLine = reader.readLine();
+            headerLine = reader.readLine();
         } catch (IOException e) {
             throw StoreExceptions.FILE_NOT_READABLE.get();
         }

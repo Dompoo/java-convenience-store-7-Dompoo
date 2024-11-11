@@ -14,6 +14,6 @@ public class PromotionFileDatabaseConfig implements PromotionDatabaseConfig {
 
     @Override
     public Database<PromotionEntity> getPromotionDatabase() {
-        return this.promotionDatabase;
+        return promotionDatabase;
     }
 }

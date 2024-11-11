@@ -47,11 +47,11 @@ final public class PurchaseInfo {
     }
 
     public int calculatePromotionUnit() {
-        return this.promotionBuy + this.promotionGet;
+        return promotionBuy + promotionGet;
     }
 
     public int getPurchaseAmountWithGetFree() {
-        return (this.purchaseAmount / calculatePromotionUnit() + 1) * calculatePromotionUnit();
+        return (purchaseAmount / calculatePromotionUnit() + 1) * calculatePromotionUnit();
     }
 
     public int getPurchaseAmountWithBringBackNotPromotion() {
@@ -59,26 +59,26 @@ final public class PurchaseInfo {
     }
 
     public int calculateStockLimitedPurchaseAmount() {
-        return Math.min(this.purchaseAmount, this.promotionStock);
+        return Math.min(purchaseAmount, promotionStock);
     }
 
     public int getPromotionGetWithFullPromotion() {
-        return (this.purchaseAmount / calculatePromotionUnit()) * this.promotionGet;
+        return (purchaseAmount / calculatePromotionUnit()) * promotionGet;
     }
 
     public int getPromotionGetWithGetFree() {
-        return ((this.purchaseAmount / calculatePromotionUnit()) + 1) * this.promotionGet;
+        return ((purchaseAmount / calculatePromotionUnit()) + 1) * promotionGet;
     }
 
     public int getPromotionGetWithPortionPromotion() {
-        return (calculateStockLimitedPurchaseAmount() / calculatePromotionUnit()) * this.promotionGet;
+        return (calculateStockLimitedPurchaseAmount() / calculatePromotionUnit()) * promotionGet;
     }
 
-    public int calculatePromotionedProductAmount(int promotionGetProductCount) {
-        if (this.promotionGet == 0) {
+    public int calculatePromotionedProductAmount(final int promotionGetProductCount) {
+        if (promotionGet == 0) {
             return 0;
         }
-        return promotionGetProductCount / this.promotionGet * calculatePromotionUnit();
+        return promotionGetProductCount / promotionGet * calculatePromotionUnit();
     }
 
     @Override

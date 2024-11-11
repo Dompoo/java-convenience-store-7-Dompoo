@@ -16,6 +16,6 @@ public class OutputHandlerConfig {
     }
 
     public OutputHandler getOutputHandler() {
-        return this.outputHandler;
+        return outputHandler;
     }
 }

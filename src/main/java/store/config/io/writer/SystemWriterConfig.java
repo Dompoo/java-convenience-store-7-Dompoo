@@ -13,6 +13,6 @@ public class SystemWriterConfig implements WriterConfig {
 
     @Override
     public Writer getWriter() {
-        return this.writer;
+        return writer;
     }
 }

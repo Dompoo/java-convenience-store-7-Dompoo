@@ -46,7 +46,7 @@ final public class Product {
     }
 
     public void reduceStock(final int totalDecreaseStock, final int promotionDecreaseStock) {
-        this.stock = this.stock.withReducing(totalDecreaseStock, promotionDecreaseStock);
+        stock = stock.withReducing(totalDecreaseStock, promotionDecreaseStock);
     }
 
     public boolean canPurchaseWithPromotion() {
@@ -91,18 +91,18 @@ final public class Product {
 
     public int calculateNoPromotionsProductCount(final int purchaseAmount) {
         int promotionUnit = promotion.getPromotionUnit();
-        if (purchaseAmount < this.getPromotionStock()) {
+        if (purchaseAmount < getPromotionStock()) {
             return purchaseAmount % promotionUnit;
         }
-        return purchaseAmount - (this.getPromotionStock() / promotionUnit) * promotionUnit;
+        return purchaseAmount - (getPromotionStock() / promotionUnit) * promotionUnit;
     }
 
     public boolean hasPromotion() {
-        return this.promotion.hasPromotion();
+        return promotion.hasPromotion();
     }
 
     public boolean canPurchase(final int purchaseAmount) {
-        return this.stock.getTotalStock() >= purchaseAmount;
+        return stock.getTotalStock() >= purchaseAmount;
     }
 
     public String getName() {
