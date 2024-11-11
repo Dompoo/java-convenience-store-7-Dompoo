@@ -131,9 +131,9 @@ class OutputParserTest {
         void 구매한_상품_목록을_파싱한다() {
             //given
             List<PurchasedProductResponse> purchasedProducts = List.of(
-                    new PurchasedProductResponse("콜라", 10, 10000),
-                    new PurchasedProductResponse("초코바", 3, 4500),
-                    new PurchasedProductResponse("감자", 4, 2000)
+                    new PurchasedProductResponse("콜라", 10, 10000, 1),
+                    new PurchasedProductResponse("초코바", 3, 4500, 2),
+                    new PurchasedProductResponse("감자", 4, 2000, 3)
             );
 
             //when
@@ -152,7 +152,7 @@ class OutputParserTest {
         void 구매량이_0이면_취소로_파싱된다() {
             //given
             List<PurchasedProductResponse> purchasedProducts = List.of(
-                    new PurchasedProductResponse("콜라", 0, 1000)
+                    new PurchasedProductResponse("콜라", 0, 1000, 1)
             );
 
             //when
@@ -173,8 +173,8 @@ class OutputParserTest {
         void 프로모션된_상품_목록을_파싱한다() {
             //given
             List<PromotionedProductResponse> promotionedProductResponses = List.of(
-                    new PromotionedProductResponse("콜라", 1),
-                    new PromotionedProductResponse("감자", 5)
+                    new PromotionedProductResponse("콜라", 1, 1),
+                    new PromotionedProductResponse("감자", 5, 2)
             );
 
             //when

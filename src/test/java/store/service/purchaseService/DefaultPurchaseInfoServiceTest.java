@@ -40,8 +40,8 @@ class DefaultPurchaseInfoServiceTest {
             Product product2 = Product.of("빼빼로", 500, 10, 0, promotion2);
             productRepositoryFake.setProducts(product1, product2);
             List<PurchaseRequest> purchaseRequests = List.of(
-                    new PurchaseRequest("우도땅콩", 10),
-                    new PurchaseRequest("빼빼로", 10)
+                    new PurchaseRequest("우도땅콩", 10, 1),
+                    new PurchaseRequest("빼빼로", 10, 2)
             );
 
             //when
@@ -65,8 +65,8 @@ class DefaultPurchaseInfoServiceTest {
             Product product2 = Product.of("빼빼로", 500, 9, 0, promotion2);
             productRepositoryFake.setProducts(product1, product2);
             List<PurchaseRequest> purchaseRequests = List.of(
-                    new PurchaseRequest("우도땅콩", 10),
-                    new PurchaseRequest("빼빼로", 10)
+                    new PurchaseRequest("우도땅콩", 10, 1),
+                    new PurchaseRequest("빼빼로", 10, 2)
             );
 
             //expected
@@ -99,7 +99,7 @@ class DefaultPurchaseInfoServiceTest {
 
             //when
             PurchaseResult result = sut.purchaseProduct(
-                    new PurchaseRequest("우도땅콩", purchaseAmount),
+                    new PurchaseRequest("우도땅콩", purchaseAmount, 1),
                     PurchaseType.FULL_DEFAULT
             );
 
@@ -130,7 +130,7 @@ class DefaultPurchaseInfoServiceTest {
 
             //when
             PurchaseResult result = sut.purchaseProduct(
-                    new PurchaseRequest("우도땅콩", purchaseAmount),
+                    new PurchaseRequest("우도땅콩", purchaseAmount, 1),
                     PurchaseType.FULL_PROMOTION
             );
 
@@ -161,7 +161,7 @@ class DefaultPurchaseInfoServiceTest {
 
             //when
             PurchaseResult result = sut.purchaseProduct(
-                    new PurchaseRequest("우도땅콩", purchaseAmount),
+                    new PurchaseRequest("우도땅콩", purchaseAmount, 1),
                     PurchaseType.FULL_PROMOTION_BRING_FREE
             );
 
@@ -192,7 +192,7 @@ class DefaultPurchaseInfoServiceTest {
 
             //when
             PurchaseResult result = sut.purchaseProduct(
-                    new PurchaseRequest("우도땅콩", purchaseAmount),
+                    new PurchaseRequest("우도땅콩", purchaseAmount, 1),
                     PurchaseType.FULL_PROMOTION_NOT_BRING_FREE
             );
 
@@ -226,7 +226,7 @@ class DefaultPurchaseInfoServiceTest {
 
             //when
             PurchaseResult result = sut.purchaseProduct(
-                    new PurchaseRequest("우도땅콩", purchaseAmount),
+                    new PurchaseRequest("우도땅콩", purchaseAmount, 1),
                     PurchaseType.PORTION_PROMOTION_BRING_BACK
             );
 
@@ -260,7 +260,7 @@ class DefaultPurchaseInfoServiceTest {
 
             //when
             PurchaseResult result = sut.purchaseProduct(
-                    new PurchaseRequest("우도땅콩", purchaseAmount),
+                    new PurchaseRequest("우도땅콩", purchaseAmount, 1),
                     PurchaseType.PORTION_PROMOTION_NOT_BRING_BACK
             );
 

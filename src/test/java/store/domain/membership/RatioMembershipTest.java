@@ -27,7 +27,8 @@ class RatioMembershipTest {
                 purchaseAmount,
                 promotionedProductAmount,
                 1000,
-                5
+                5,
+                1
         );
 
         //when
@@ -53,8 +54,8 @@ class RatioMembershipTest {
         //given
         RatioMembership sut = new RatioMembership();
         List<PurchaseResult> purchaseResults = List.of(
-                new PurchaseResult("땅콩", purchaseAmount1, promotionedProductAmount1, 1000, 5),
-                new PurchaseResult("빼빼로", purchaseAmoun2, promotionedProductAmount2, 1000, 5)
+                new PurchaseResult("땅콩", purchaseAmount1, promotionedProductAmount1, 1000, 5, 1),
+                new PurchaseResult("빼빼로", purchaseAmoun2, promotionedProductAmount2, 1000, 5, 2)
         );
 
         //when
@@ -82,7 +83,8 @@ class RatioMembershipTest {
                 purchaseAmount,
                 promotionedProductAmount,
                 1000,
-                5
+                5,
+                1
         );
 
         //when

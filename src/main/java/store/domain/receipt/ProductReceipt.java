@@ -13,7 +13,8 @@ final public class ProductReceipt {
         this.purchasedProductResponses.add(new PurchasedProductResponse(
                 purchaseResult.productName(),
                 purchaseResult.purchaseAmount(),
-                purchaseResult.price() * purchaseResult.purchaseAmount()
+                purchaseResult.price() * purchaseResult.purchaseAmount(),
+                purchaseResult.requestOrder()
         ));
     }
 

@@ -41,7 +41,7 @@ class DefaultDecisionServiceTest {
             Promotion promotion = Promotion.getNoPromotion();
             Product product = Product.of("감자", 1000, 10, 13, promotion);
             productRepositoryFake.setProducts(product);
-            PurchaseRequest purchaseRequest = new PurchaseRequest("감자", purchaseAmount);
+            PurchaseRequest purchaseRequest = new PurchaseRequest("감자", purchaseAmount, 1);
 
             //when
             DecisionType result = sut.getDecisionType(purchaseRequest);
@@ -59,7 +59,7 @@ class DefaultDecisionServiceTest {
             Promotion promotion = Promotion.of("감자2+1", 2, 1);
             Product product = Product.of("감자", 1000, 10, 13, promotion);
             productRepositoryFake.setProducts(product);
-            PurchaseRequest purchaseRequest = new PurchaseRequest("감자", purchaseAmount);
+            PurchaseRequest purchaseRequest = new PurchaseRequest("감자", purchaseAmount, 1);
 
             //when
             DecisionType result = sut.getDecisionType(purchaseRequest);
@@ -77,7 +77,7 @@ class DefaultDecisionServiceTest {
             Promotion promotion = Promotion.of("감자2+1", 2, 1);
             Product product = Product.of("감자", 1000, 10, 13, promotion);
             productRepositoryFake.setProducts(product);
-            PurchaseRequest purchaseRequest = new PurchaseRequest("감자", purchaseAmount);
+            PurchaseRequest purchaseRequest = new PurchaseRequest("감자", purchaseAmount, 1);
 
             //when
             DecisionType result = sut.getDecisionType(purchaseRequest);
@@ -95,7 +95,7 @@ class DefaultDecisionServiceTest {
             Promotion promotion = Promotion.of("감자2+1", 2, 1);
             Product product = Product.of("감자", 1000, 10, 11, promotion);
             productRepositoryFake.setProducts(product);
-            PurchaseRequest purchaseRequest = new PurchaseRequest("감자", purchaseAmount);
+            PurchaseRequest purchaseRequest = new PurchaseRequest("감자", purchaseAmount, 1);
 
             //when
             DecisionType result = sut.getDecisionType(purchaseRequest);
@@ -113,7 +113,7 @@ class DefaultDecisionServiceTest {
             Promotion promotion = Promotion.of("감자2+1", 2, 1);
             Product product = Product.of("감자", 1000, 10, 11, promotion);
             productRepositoryFake.setProducts(product);
-            PurchaseRequest purchaseRequest = new PurchaseRequest("감자", purchaseAmount);
+            PurchaseRequest purchaseRequest = new PurchaseRequest("감자", purchaseAmount, 1);
 
             //expected
             assertThatThrownBy(() -> sut.getDecisionType(purchaseRequest))
@@ -137,7 +137,7 @@ class DefaultDecisionServiceTest {
 
             //when
             PurchaseType result = sut.decidePurchaseType(
-                    new PurchaseRequest("감자", purchaseAmount),
+                    new PurchaseRequest("감자", purchaseAmount, 1),
                     DecisionType.FULL_DEFAULT,
                     (name, count) -> null,
                     (name, count) -> null
@@ -159,7 +159,7 @@ class DefaultDecisionServiceTest {
 
             //when
             PurchaseType result = sut.decidePurchaseType(
-                    new PurchaseRequest("감자", purchaseAmount),
+                    new PurchaseRequest("감자", purchaseAmount, 1),
                     DecisionType.FULL_PROMOTION,
                     (name, count) -> null,
                     (name, count) -> null
@@ -181,7 +181,7 @@ class DefaultDecisionServiceTest {
 
             //when
             PurchaseType result = sut.decidePurchaseType(
-                    new PurchaseRequest("감자", purchaseAmount),
+                    new PurchaseRequest("감자", purchaseAmount, 1),
                     DecisionType.CAN_GET_FREE_PRODUCT,
                     (name, count) -> false,
                     (name, count) -> null
@@ -203,7 +203,7 @@ class DefaultDecisionServiceTest {
 
             //when
             PurchaseType result = sut.decidePurchaseType(
-                    new PurchaseRequest("감자", purchaseAmount),
+                    new PurchaseRequest("감자", purchaseAmount, 1),
                     DecisionType.CAN_GET_FREE_PRODUCT,
                     (name, count) -> true,
                     (name, count) -> null
@@ -225,7 +225,7 @@ class DefaultDecisionServiceTest {
 
             //when
             PurchaseType result = sut.decidePurchaseType(
-                    new PurchaseRequest("감자", purchaseAmount),
+                    new PurchaseRequest("감자", purchaseAmount, 1),
                     DecisionType.PROMOTION_STOCK_LACK,
                     (name, count) -> null,
                     (name, count) -> false
@@ -247,7 +247,7 @@ class DefaultDecisionServiceTest {
 
             //when
             PurchaseType result = sut.decidePurchaseType(
-                    new PurchaseRequest("감자", purchaseAmount),
+                    new PurchaseRequest("감자", purchaseAmount, 1),
                     DecisionType.PROMOTION_STOCK_LACK,
                     (name, count) -> null,
                     (name, count) -> true

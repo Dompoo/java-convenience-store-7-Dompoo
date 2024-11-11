@@ -13,7 +13,8 @@ final public class PromotionReceipt {
         if (purchaseResult.promotionGetAmount() == 0) return;
         this.promotionedProductResponses.add(new PromotionedProductResponse(
                 purchaseResult.productName(),
-                purchaseResult.promotionGetAmount()
+                purchaseResult.promotionGetAmount(),
+                purchaseResult.requestOrder()
         ));
     }
 

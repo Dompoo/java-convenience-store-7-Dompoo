@@ -14,8 +14,8 @@ class ProductReceiptTest {
     void 프로모션_내역을_받는다() {
         //given
         PromotionReceipt sut = new PromotionReceipt();
-        sut.addPurchase(new PurchaseResult("땅콩", 20, 10, 1000, 5));
-        sut.addPurchase(new PurchaseResult("빼빼로", 25, 15, 500, 5));
+        sut.addPurchase(new PurchaseResult("땅콩", 20, 10, 1000, 5, 1));
+        sut.addPurchase(new PurchaseResult("빼빼로", 25, 15, 500, 5, 2));
 
         //when
         List<PromotionedProductResponse> result = sut.buildPromotionedProductResponses();

@@ -44,6 +44,6 @@ public class DefaultPurchaseService implements PurchaseService {
         PurchaseStatus purchaseStatus = purchaseType.proceed(purchaseInfo);
         product.reduceStock(purchaseStatus.finalPurchaseAmount(), purchaseStatus.decreasePromotionStock());
         productRepository.update(product);
-        return PurchaseResult.of(product, purchaseStatus);
+        return PurchaseResult.of(product, purchaseStatus, purchaseRequest.requestOrder());
     }
 }

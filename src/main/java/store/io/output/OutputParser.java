@@ -41,7 +41,9 @@ public class OutputParser {
     public String parsePurchasedProductsResponses(final List<PurchasedProductResponse> purchasedProductResponses) {
         return Stream.concat(
                 Stream.of(RECEIPT_OUTPUT_FORMAT.formatted("상품명", "수량", "금액")),
-                purchasedProductResponses.stream().map(OutputParser::mapPurchasedProductResponseToString)
+                purchasedProductResponses.stream()
+                        .sorted()
+                        .map(OutputParser::mapPurchasedProductResponseToString)
         ).collect(Collectors.joining(NEW_LINE));
     }
 
@@ -70,6 +72,7 @@ public class OutputParser {
             final List<PromotionedProductResponse> promotionedProductResponses
     ) {
         return promotionedProductResponses.stream()
+                .sorted()
                 .map(OutputParser::mapPromotionedProductResponseToString)
                 .collect(Collectors.joining(NEW_LINE));
     }

@@ -7,15 +7,21 @@ public record PurchaseResult(
         int purchaseAmount,
         int promotionedProductAmount,
         int price,
-        int promotionGetAmount
+        int promotionGetAmount,
+        int requestOrder
 ) {
-    public static PurchaseResult of(final Product product, final PurchaseStatus purchaseStatus) {
+    public static PurchaseResult of(
+            final Product product,
+            final PurchaseStatus purchaseStatus,
+            final int requestOrder
+    ) {
         return new PurchaseResult(
                 product.getName(),
                 purchaseStatus.finalPurchaseAmount(),
                 purchaseStatus.promotionedProductAmount(),
                 product.getPrice(),
-                purchaseStatus.promotionGetAmount()
+                purchaseStatus.promotionGetAmount(),
+                requestOrder
         );
     }
 
