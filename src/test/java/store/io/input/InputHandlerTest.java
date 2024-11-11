@@ -306,7 +306,7 @@ class InputHandlerTest {
             readerFake.setInputs("Y");
 
             //when
-            boolean result = sut.handleRePuchase();
+            boolean result = sut.handleRePuchaseDecision();
 
             //then
             assertThat(result).isTrue();
@@ -318,7 +318,7 @@ class InputHandlerTest {
             readerFake.setInputs("N");
 
             //when
-            boolean result = sut.handleRePuchase();
+            boolean result = sut.handleRePuchaseDecision();
 
             //then
             assertThat(result).isFalse();
@@ -330,7 +330,7 @@ class InputHandlerTest {
             readerFake.setInputs("a");
 
             //expected
-            assertThatThrownBy(() -> sut.handleRePuchase())
+            assertThatThrownBy(() -> sut.handleRePuchaseDecision())
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage("잘못된 입력입니다. 다시 입력해 주세요.");
         }
@@ -341,7 +341,7 @@ class InputHandlerTest {
             readerFake.setInputs("aa");
 
             //expected
-            assertThatThrownBy(() -> sut.handleRePuchase())
+            assertThatThrownBy(() -> sut.handleRePuchaseDecision())
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage("잘못된 입력입니다. 다시 입력해 주세요.");
         }

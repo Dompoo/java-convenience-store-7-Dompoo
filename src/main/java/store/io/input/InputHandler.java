@@ -57,7 +57,7 @@ public class InputHandler {
         return inputParser.parseDecision(membershipDecision);
     }
 
-    public boolean handleRePuchase() {
+    public boolean handleRePuchaseDecision() {
         writer.writeLine("\n감사합니다. 구매하고 싶은 다른 상품이 있나요? (Y/N)");
         String rePurchaseDecision = reader.readLineAsString();
         inputValidator.validateDecision(rePurchaseDecision);

@@ -23,6 +23,6 @@ public class ControllerRePurchaseProxy implements Controller {
     public void run() {
         do {
             targetController.run();
-        } while (retryHandler.tryUntilSuccess(inputHandler::handleRePuchase));
+        } while (retryHandler.tryUntilSuccess(inputHandler::handleRePuchaseDecision));
     }
 }
