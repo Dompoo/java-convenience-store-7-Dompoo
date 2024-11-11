@@ -24,9 +24,9 @@ final public class Cashier {
     private static PurchaseType decideBringFreeProduct(
             final Product product,
             final int purchaseAmount,
-            final DecisionSupplier<Boolean> bringFreeProductPredicate
+            final DecisionSupplier<Boolean> bringFreeProductSupplier
     ) {
-        if (bringFreeProductPredicate.get(product.getName(), product.calculateBringFreeProductCount(purchaseAmount))) {
+        if (bringFreeProductSupplier.get(product.getName(), product.calculateBringFreeProductCount(purchaseAmount))) {
             return PurchaseType.FULL_PROMOTION_BRING_FREE;
         }
         return PurchaseType.FULL_PROMOTION_NOT_BRING_FREE;
@@ -35,11 +35,12 @@ final public class Cashier {
     private static PurchaseType decideBringDefaultProductBack(
             final Product product,
             final int purchaseAmount,
-            final DecisionSupplier<Boolean> bringDefaultProductBackPredicate
+            final DecisionSupplier<Boolean> bringDefaultProductBackSupplier
     ) {
-        if (bringDefaultProductBackPredicate.get(
+        if (bringDefaultProductBackSupplier.get(
                 product.getName(),
-                product.calculateNoPromotionsProductCount(purchaseAmount))) {
+                product.calculateNoPromotionsProductCount(purchaseAmount))
+        ) {
             return PurchaseType.PORTION_PROMOTION_NOT_BRING_BACK;
         }
         return PurchaseType.PORTION_PROMOTION_BRING_BACK;
