@@ -7,21 +7,17 @@ import store.domain.vo.PurchaseResult;
 
 final public class ProductReceipt {
 
-    private final List<PurchaseResult> purchaseResults = new ArrayList<>();
+    private final List<PurchasedProductResponse> purchasedProductResponses = new ArrayList<>();
 
     public void addPurchase(final PurchaseResult purchaseResult) {
-        this.purchaseResults.add(purchaseResult);
+        this.purchasedProductResponses.add(new PurchasedProductResponse(
+                purchaseResult.productName(),
+                purchaseResult.purchaseAmount(),
+                purchaseResult.price() * purchaseResult.purchaseAmount()
+        ));
     }
 
     public List<PurchasedProductResponse> buildPurchasedProductResponses() {
-        List<PurchasedProductResponse> purchasedProducts = new ArrayList<>();
-        for (PurchaseResult purchaseResult : this.purchaseResults) {
-            purchasedProducts.add(new PurchasedProductResponse(
-                    purchaseResult.productName(),
-                    purchaseResult.purchaseAmount(),
-                    purchaseResult.price() * purchaseResult.purchaseAmount()
-            ));
-        }
-        return purchasedProducts;
+        return this.purchasedProductResponses;
     }
 }

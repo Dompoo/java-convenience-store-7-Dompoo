@@ -9,15 +9,9 @@ import store.domain.vo.PurchaseResult;
 
 final public class Receipt {
 
-    private final ProductReceipt productReceipt;
-    private final PromotionReceipt promotionReceipt;
-    private final CostReceipt costReceipt;
-
-    public Receipt() {
-        this.productReceipt = new ProductReceipt();
-        this.promotionReceipt = new PromotionReceipt();
-        this.costReceipt = new CostReceipt();
-    }
+    private final ProductReceipt productReceipt = new ProductReceipt();
+    private final PromotionReceipt promotionReceipt = new PromotionReceipt();
+    private final CostReceipt costReceipt = new CostReceipt();
 
     public void addPurchase(final PurchaseResult purchaseResult) {
         this.productReceipt.addPurchase(purchaseResult);
@@ -29,15 +23,15 @@ final public class Receipt {
         this.costReceipt.applyMembership(membership);
     }
 
-    public List<PurchasedProductResponse> buildPurchasedProductResponses() {
+    public List<PurchasedProductResponse> getPurchasedProductResponses() {
         return this.productReceipt.buildPurchasedProductResponses();
     }
 
-    public List<PromotionedProductResponse> buildPromotionedProductResponses() {
+    public List<PromotionedProductResponse> getPromotionedProductResponses() {
         return this.promotionReceipt.buildPromotionedProductResponses();
     }
 
-    public PurchaseCostResponse buildPurchaseCostResponse() {
+    public PurchaseCostResponse getPurchaseCostResponse() {
         return this.costReceipt.buildPurchaseCostResponse();
     }
 }

@@ -7,21 +7,17 @@ import store.domain.vo.PurchaseResult;
 
 final public class PromotionReceipt {
 
-    private final List<PurchaseResult> purchaseResults = new ArrayList<>();
+    private final List<PromotionedProductResponse> promotionedProductResponses = new ArrayList<>();
 
     public void addPurchase(final PurchaseResult purchaseResult) {
-        this.purchaseResults.add(purchaseResult);
+        if (purchaseResult.promotionGetAmount() == 0) return;
+        this.promotionedProductResponses.add(new PromotionedProductResponse(
+                purchaseResult.productName(),
+                purchaseResult.promotionGetAmount()
+        ));
     }
 
     public List<PromotionedProductResponse> buildPromotionedProductResponses() {
-        List<PromotionedProductResponse> promotionGets = new ArrayList<>();
-        for (PurchaseResult purchaseResult : this.purchaseResults) {
-            String productName = purchaseResult.productName();
-            int promotionGetAmount = purchaseResult.promotionGetAmount();
-            if (promotionGetAmount != 0) {
-                promotionGets.add(new PromotionedProductResponse(productName, promotionGetAmount));
-            }
-        }
-        return promotionGets;
+        return this.promotionedProductResponses;
     }
 }

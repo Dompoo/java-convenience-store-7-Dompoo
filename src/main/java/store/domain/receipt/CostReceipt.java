@@ -29,7 +29,7 @@ final public class CostReceipt {
                 calculatePurchaseCount(),
                 promotionSaleCost,
                 membershipSaleCost,
-                originalPurchaseCost - promotionSaleCost - membershipSaleCost
+                calculateFinalPrice(originalPurchaseCost, promotionSaleCost, membershipSaleCost)
         );
     }
 
@@ -49,5 +49,13 @@ final public class CostReceipt {
         return purchaseResults.stream()
                 .mapToInt(purchaseResult -> purchaseResult.promotionGetAmount() * purchaseResult.price())
                 .sum();
+    }
+
+    private static int calculateFinalPrice(
+            final int originalPurchaseCost,
+            final int promotionSaleCost,
+            final int membershipSaleCost
+    ) {
+        return originalPurchaseCost - promotionSaleCost - membershipSaleCost;
     }
 }

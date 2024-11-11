@@ -69,8 +69,8 @@ public class DefaultController implements Controller {
     }
 
     private void processReceipt(final Receipt receipt) {
-        outputHandler.handlePurchasedProcuts(receipt.buildPurchasedProductResponses());
-        outputHandler.handlePromotionedProducts(receipt.buildPromotionedProductResponses());
-        outputHandler.handlePurchaseCost(receipt.buildPurchaseCostResponse());
+        outputHandler.handlePurchasedProcuts(receipt.getPurchasedProductResponses());
+        outputHandler.handlePromotionedProducts(receipt.getPromotionedProductResponses());
+        outputHandler.handlePurchaseCost(receipt.getPurchaseCostResponse());
     }
 }
